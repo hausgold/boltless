@@ -1,0 +1,48 @@
+# CREATE (n:User { name: $name }) RETURN n [result_as_graph: true]
+# MATCH (n:User) RETURN n
+---
+columns:
+- n
+data:
+- row:
+  - name: Kalle
+  meta:
+  - id: 149
+    type: node
+    deleted: false
+  graph:
+    nodes:
+    - id: '149'
+      labels:
+      - User
+      properties:
+        name: Kalle
+    relationships: []
+- row:
+  - name: Klaus
+  meta:
+  - id: 147
+    type: node
+    deleted: false
+  graph:
+    nodes:
+    - id: '147'
+      labels:
+      - User
+      properties:
+        name: Klaus
+    relationships: []
+- row:
+  - name: Bernd
+  meta:
+  - id: 148
+    type: node
+    deleted: false
+  graph:
+    nodes:
+    - id: '148'
+      labels:
+      - User
+      properties:
+        name: Bernd
+    relationships: []

@@ -1,0 +1,21 @@
+---
+columns:
+- name
+- birthday
+- written_books
+- active
+data:
+- row:
+  - Bernd
+  - 1971-07-28
+  - 2
+  - true
+  meta:
+  -
+- row:
+  - Klaus
+  - 1998-01-03
+  - 0
+  - false
+  meta:
+  -

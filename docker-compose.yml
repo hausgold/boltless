@@ -1,0 +1,19 @@
+version: "3"
+services:
+  test:
+    image: ruby:2.7
+    network_mode: bridge
+    working_dir: /app
+    links:
+      - neo4j
+    volumes:
+      - .:/app
+
+  neo4j:
+    image: hausgold/neo4j:4.4
+    network_mode: bridge
+    ports: ["7474", "7687"]
+    volumes:
+      - .:/app:${DOCKER_MOUNT_MODE:-rw}
+    environment:
+      MDNS_HOSTNAME: neo4j.boltless.local

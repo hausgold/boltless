@@ -1,0 +1,78 @@
+name: Test
+on:
+  push:
+    branches:
+      - '**'
+  schedule:
+    - cron: '0 0 * * MON'
+
+concurrency:
+  group: '${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: 'Test the gem (Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }})'
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [2.5, 2.6, 2.7, '3.0', 3.1]
+        rails: [5.2, '6.0', 6.1, '7.0']
+        exclude:
+          # Rails 7.0 requires Ruby >=2.7
+          - ruby: 2.5
+            rails: '7.0'
+          - ruby: 2.6
+            rails: '7.0'
+    env:
+      BUNDLE_GEMFILE: 'gemfiles/rails_${{ matrix.rails }}.gemfile'
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install the correct Ruby version
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          rubygems: latest
+
+      - name: Prepare the virtual environment
+        uses: hausgold/actions/ci@master
+        with:
+          clone_token: '${{ secrets.CLONE_TOKEN }}'
+          settings: '${{ github.repository }}'
+          target: ci/gem-test
+
+      - name: Start the dependent services
+        run: docker-compose up -d neo4j
+
+      - name: Setup mDNS
+        run: setup-mdns
+
+      - name: Wait for database to be ready
+        run: await-tcp-open 'neo4j.boltless.local' '7474'
+
+      - name: Run the gem tests
+        run: make test
+
+      - name: Upload the code coverage report
+        run: coverage
+
+  trigger-docs:
+    name: Trigger the documentation upload
+    runs-on: ubuntu-20.04
+    timeout-minutes: 2
+    needs: test
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Prepare the virtual environment
+        uses: hausgold/actions/ci@master
+        with:
+          clone_token: '${{ secrets.CLONE_TOKEN }}'
+          settings: '${{ github.repository }}'
+          target: ci/noop
+
+      - name: Trigger the documentation upload
+        run: workflow documentation

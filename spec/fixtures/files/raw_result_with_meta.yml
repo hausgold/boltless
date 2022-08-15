@@ -1,0 +1,11 @@
+# CREATE (n:User { name: $name }) RETURN n
+---
+columns:
+- n
+data:
+- row:
+  - name: Klaus
+  meta:
+  - id: 145
+    type: node
+    deleted: false
