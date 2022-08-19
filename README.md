@@ -93,7 +93,7 @@ a self descriptive example:
 
 ```ruby
 # All the configured values here represent the Gem defaults.
-Boltless.configure do |conf|
+Boltless.configure do |config|
   # The base URL of the neo4j HTTP API (port 7474 for HTTP, port 7473
   # for HTTPS when configured at server side)
   config.base_url = 'http://neo4j:7474'
