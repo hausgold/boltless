@@ -472,6 +472,7 @@ RSpec.describe Boltless::Request do
 
   describe '#handle_response_body' do
     let(:action) { instance.handle_response_body(response, tx_id: tx_id) }
+    let(:safe_action) { suppress(StandardError) { action } }
 
     context 'with invalid JSON response' do
       let(:body) { '<html>Service unavailable</html>' }
@@ -596,6 +597,35 @@ RSpec.describe Boltless::Request do
       it 'allows to access the wrapped errors' do
         expect(catch_exception.call { action }.errors).to \
           all(be_a(Boltless::Errors::ResponseError))
+      end
+    end
+
+    context 'with a custom raw response handler' do
+      let(:body) { { test: true }.to_json }
+      let(:handler) { proc { 'test!' } }
+
+      before { Boltless.configuration.raw_response_handler = handler }
+
+      it 'uses the raw response handler return value for parsing' do
+        expect(FastJsonparser).to \
+          receive(:parse).with('test!').once.and_call_original
+        safe_action
+      end
+
+      it 'passes over the raw response body' do
+        Boltless.configuration.raw_response_handler = proc do |body, _res|
+          expect(body).to be_eql('{"test":true}')
+          body
+        end
+        action
+      end
+
+      it 'passes over the raw response' do
+        Boltless.configuration.raw_response_handler = proc do |body, res|
+          expect(res).to be_a(HTTP::Response)
+          body
+        end
+        action
       end
     end
   end

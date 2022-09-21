@@ -156,6 +156,20 @@ Boltless.configure do |config|
     # Return the configured connection
     connection
   end
+
+  # We allow to check/modify the raw neo4j response body string before it
+  # gets JSON parsed and handled. This may be handy for some low-level
+  # analyses on the raw responses. The first argument of the user defined
+  # block will be the raw response body string and the second it the full
+  # HTTP response object (+HTTP::Response+). The user defined block MUST
+  # return a JSON parsable string (eg. the original input) in order to
+  # continue regular processing.
+  config.raw_response_handler = proc do |body, response|
+    # Do some checks on the raw/unparsed response body ..
+
+    # Return the original (or modified) response body
+    body
+  end
 end
 ```
 
