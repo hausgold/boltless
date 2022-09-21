@@ -1,3 +1,9 @@
+### next
+
+* Added a raw response handler hook which allows to check/modify the neo4j
+  response body before it gets JSON parsed
+  (`Boltless.configuration.raw_response_handler`) (#1)
+
 ### 1.0.0
 
 * Initial gem implementation

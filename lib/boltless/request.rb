@@ -238,8 +238,11 @@ module Boltless
     #   handling (error, raw result, restructured result)
     # rubocop:disable Metrics/AbcSize dito
     def handle_response_body(res, tx_id: nil)
-      # Parse the response body as a whole
-      body = FastJsonparser.parse(res.to_s)
+      # Parse the response body as a whole, which is returned by
+      # the configured raw response handler
+      body = FastJsonparser.parse(
+        Boltless.configuration.raw_response_handler.call(res.to_s, res)
+      )
 
       # When we hit some response errors, we handle them and
       # re-raise in a wrapped exception

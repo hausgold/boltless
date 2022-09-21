@@ -17,3 +17,4 @@ services:
       - .:/app:${DOCKER_MOUNT_MODE:-rw}
     environment:
       MDNS_HOSTNAME: neo4j.boltless.local
+      NEO4J_dbms_logs_http_enabled: 'true'
