@@ -3,7 +3,6 @@
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'countless/rake_tasks'
-require 'pp'
 
 RSpec::Core::RakeTask.new(:spec)
 

@@ -96,7 +96,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       let(:statement) { statement_with_syntax_errors }
 
       it 'returns nil' do
-        expect(action).to be(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       let(:opts) { { access_mode: :read } }
 
       it 'returns nil' do
-        expect(action).to be(nil)
+        expect(action).to be_nil
       end
     end
   end
@@ -193,7 +193,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns nil' do
-        expect(action).to be(nil)
+        expect(action).to be_nil
       end
 
       it 'rolls back the transaction (no data is written)' do
@@ -324,7 +324,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns nil' do
-        expect(action).to be(nil)
+        expect(action).to be_nil
       end
 
       it 'rolls back the transaction (no data is written)' do

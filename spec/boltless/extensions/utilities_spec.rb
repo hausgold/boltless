@@ -207,7 +207,7 @@ RSpec.describe Boltless::Extensions::Utilities do
         res = described_class.prepare_label(
           [:a], [true, [false, ['"nice"', "o'neil"], nil]]
         )
-        expect(res).to be_eql("A:False:True:`\"nice\"`:`O\'neil`")
+        expect(res).to be_eql("A:False:True:`\"nice\"`:`O'neil`")
       end
     end
 
@@ -302,7 +302,7 @@ RSpec.describe Boltless::Extensions::Utilities do
         res = described_class.prepare_type(
           [:a], [true, [false, ['"nice"', "o'neil"], nil], 1], 12.14
         )
-        expect(res).to be_eql("1|A|FALSE|TRUE|`\"NICE\"`|`12.14`|`O\'NEIL`")
+        expect(res).to be_eql("1|A|FALSE|TRUE|`\"NICE\"`|`12.14`|`O'NEIL`")
       end
     end
 

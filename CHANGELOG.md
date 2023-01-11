@@ -1,3 +1,11 @@
+### next
+
+* Bundler >= 2.3 is from now on required as minimal version (#2)
+* Dropped support for Ruby < 2.5 (#2)
+* Dropped support for Rails < 5.2 (#2)
+* Updated all development/runtime gems to their latest
+  Ruby 2.5 compatible version (#2)
+
 ### 1.1.0
 
 * Added a raw response handler hook which allows to check/modify the neo4j

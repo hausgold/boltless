@@ -20,15 +20,16 @@ RSpec.describe Boltless::Extensions::ConnectionPool do
     let(:action) { described_class.connection_pool }
     let(:options) { action.checkout.default_options }
     let(:auth) do
-      Base64.decode64(
-        options.headers['Authorization'].split(' ').last
-      ).split(':')
+      Base64.decode64(options.headers['Authorization'].split.last).split(':')
     end
 
+    # rubocop:disable RSpec/IdenticalEqualityAssertion because we want to
+    #   check for a memoized result
     it 'returns a memoized connection pool instance' do
       expect(described_class.connection_pool).to \
         be(described_class.connection_pool)
     end
+    # rubocop:enable RSpec/IdenticalEqualityAssertion
 
     it 'returns a HTTP client instance when requested' do
       expect(action.checkout).to be_a(HTTP::Client)
