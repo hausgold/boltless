@@ -140,7 +140,7 @@ RSpec.describe Boltless::Transaction do
 
     context 'when not yet started' do
       it 'returns nil' do
-        expect(action).to be(nil)
+        expect(action).to be_nil
       end
     end
 

@@ -58,7 +58,7 @@ module Boltless
       @access_mode = mode = access_mode.to_s.upcase
       unless %(READ WRITE).include? mode
         raise ArgumentError, "Unknown access mode '#{access_mode}'. " \
-          "Use ':read' or ':write'."
+                             "Use ':read' or ':write'."
       end
 
       @connection = connection
