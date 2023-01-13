@@ -59,9 +59,9 @@ module Boltless
           raise e if @upstream_retry_count >= max_retries
 
           logger.warn do
-            '> neo4j is unavailable, retry in 2 seconds' \
-              " (#{@upstream_retry_count}/#{max_retries}, " \
-              "#{configuration.base_url})"
+            '> neo4j is unavailable, retry in 2 seconds ' \
+            "(#{@upstream_retry_count}/#{max_retries}, " \
+            "#{configuration.base_url})"
               .colorize(:yellow)
           end
           sleep(retry_sleep)
