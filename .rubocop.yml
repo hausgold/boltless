@@ -1,13 +1,15 @@
 require:
   - rubocop-rspec
 
-Documentation:
+Style/Documentation:
   Enabled: true
 
 AllCops:
+  NewCops: enable
+  SuggestExtensions: false
   DisplayCopNames: true
   TargetRubyVersion: 2.5
-  SuggestExtensions: false
+  TargetRailsVersion: 5.2
   Exclude:
     - bin/**/*
     - vendor/**/*
@@ -22,6 +24,10 @@ Metrics/BlockLength:
     - spec/**/*.rb
     - '**/*.rake'
     - doc/**/*.rb
+
+# MFA is not yet enabled for our gems yet.
+Gemspec/RequireMFA:
+  Enabled: false
 
 # We stay with the original Ruby Style Guide recommendation.
 Layout/LineLength:
@@ -65,4 +71,14 @@ RSpec/MultipleMemoizedHelpers:
 # This looks like a false/positive. We test explicitly
 # with the +expect+ mock call.
 RSpec/StubbedMock:
+  Enabled: false
+
+# NOTE: Remove this when Ruby 2.7 is the minimum version.
+# See: https://github.com/rubocop/rubocop/pull/11177
+Style/ObjectThen:
+  Enabled: false
+
+# NOTE: Remove this when Ruby 2.7 is the minimum version.
+# Because otherwise +.pretty_inspect+ is not defined. (+require 'pp'+)
+Lint/RedundantRequireStatement:
   Enabled: false
