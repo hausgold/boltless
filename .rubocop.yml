@@ -1,5 +1,9 @@
 require:
   - rubocop-rspec
+  - rubocop-rails
+
+Rails:
+  Enabled: true
 
 Style/Documentation:
   Enabled: true
@@ -24,6 +28,16 @@ Metrics/BlockLength:
     - spec/**/*.rb
     - '**/*.rake'
     - doc/**/*.rb
+
+# NOTE: Remove this when Ruby 2.7 is the minimum version.
+# Our examples use +pp+ a lot.
+Lint/Debugger:
+  Exclude:
+    - spec/**/*.rb
+
+# We do not require to run in a timezone configured environment.
+Rails/Date:
+  Enabled: false
 
 # MFA is not yet enabled for our gems yet.
 Gemspec/RequireMFA:
