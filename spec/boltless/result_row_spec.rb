@@ -37,7 +37,7 @@ RSpec.describe Boltless::ResultRow do
   describe '#values' do
     it 'returns all row values' do
       expect(instance.values).to \
-        match_array(['Bernd', Date.parse('1971-07-28'), 2, true])
+        contain_exactly('Bernd', Date.parse('1971-07-28'), 2, true)
     end
   end
 

@@ -111,7 +111,7 @@ RSpec.describe Boltless::Extensions::Operations do
 
     it 'returns the known index names' do
       expect(described_class.index_names).to \
-        match_array(%w[user_id session_id])
+        contain_exactly('user_id', 'session_id')
     end
   end
 
@@ -127,14 +127,14 @@ RSpec.describe Boltless::Extensions::Operations do
 
     it 'returns the known constraint names' do
       expect(described_class.constraint_names).to \
-        match_array(%w[uniq_user_email uniq_user_session])
+        contain_exactly('uniq_user_email', 'uniq_user_session')
     end
   end
 
   describe '.add_index' do
     it 'allows to create a new index' do
       described_class.add_index(name: 'user_id', for: '(n:User)', on: 'n.id')
-      expect(described_class.index_names).to match_array(['user_id'])
+      expect(described_class.index_names).to contain_exactly('user_id')
     end
   end
 
@@ -146,7 +146,7 @@ RSpec.describe Boltless::Extensions::Operations do
     context 'with an existing index' do
       it 'allows to drop an index' do
         described_class.drop_index('user_id')
-        expect(described_class.index_names).to match_array([])
+        expect(described_class.index_names).to be_empty
       end
     end
 
@@ -162,7 +162,7 @@ RSpec.describe Boltless::Extensions::Operations do
       described_class.add_constraint(name: 'uniq_user_email', for: '(n:User)',
                                      require: 'n.email IS UNIQUE')
       expect(described_class.constraint_names).to \
-        match_array(['uniq_user_email'])
+        contain_exactly('uniq_user_email')
     end
   end
 
@@ -175,7 +175,7 @@ RSpec.describe Boltless::Extensions::Operations do
     context 'with an existing constraint' do
       it 'allows to drop an constraint' do
         described_class.drop_constraint('uniq_user_email')
-        expect(described_class.constraint_names).to match_array([])
+        expect(described_class.constraint_names).to be_empty
       end
     end
 

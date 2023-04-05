@@ -390,7 +390,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(request).to receive(:run_query).and_return([]) }
 
       it 'returns an empty array' do
-        expect(action).to match_array([])
+        expect(action).to be_empty
       end
     end
   end
@@ -458,7 +458,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(request).to receive(:commit_transaction).and_return([]) }
 
       it 'returns an empty array' do
-        expect(action).to match_array([])
+        expect(action).to be_empty
       end
 
       it 'switches the state to closed' do

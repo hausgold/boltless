@@ -66,7 +66,7 @@ RSpec.describe Boltless::Extensions::Transactions do
 
       it 'returns the user names' do
         expect(action.pluck(:name)).to \
-          match_array(%w[Bernd Klaus Uwe Monika])
+          contain_exactly('Bernd', 'Klaus', 'Uwe', 'Monika')
       end
 
       it 'returns a Boltless::Result' do
@@ -281,7 +281,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns an empty array (due to no finalization statements given)' do
-        expect(action).to match_array([])
+        expect(action).to be_empty
       end
 
       it 'completed the transaction (data is written)' do
@@ -388,7 +388,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns an empty array (due to no finalization statements given)' do
-        expect(action).to match_array([])
+        expect(action).to be_empty
       end
 
       it 'completed the transaction (data is written)' do

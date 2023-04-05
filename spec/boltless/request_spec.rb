@@ -492,7 +492,7 @@ RSpec.describe Boltless::Request do
       end
 
       it 'returns an empty array' do
-        expect(action).to match_array([])
+        expect(action).to be_empty
       end
     end
 
