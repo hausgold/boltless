@@ -1,6 +1,7 @@
 ### next
 
 * Moved the development dependencies from the gemspec to the Gemfile (#4)
+* Dropped support for Ruby <2.7 (#5)
 
 ### 1.3.0
 
