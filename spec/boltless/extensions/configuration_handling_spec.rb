@@ -33,7 +33,7 @@ RSpec.describe Boltless::Extensions::ConfigurationHandling do
     end
 
     it 'returns a logger with the default info level' do
-      expect(described_class.logger.level).to be_eql(Logger::INFO)
+      expect(described_class.logger.level).to eql(Logger::INFO)
     end
   end
 end

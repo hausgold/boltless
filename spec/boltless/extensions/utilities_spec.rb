@@ -13,7 +13,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { {} }
 
       it 'returns the untouched input string' do
-        expect(action).to be_eql(cypher)
+        expect(action).to eql(cypher)
       end
     end
 
@@ -31,7 +31,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { subject: 'User' } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (n:User)')
+        expect(action).to eql('CREATE (n:User)')
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { label: :user } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (n:User)')
+        expect(action).to eql('CREATE (n:User)')
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { subject_label: :user } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (n:User)')
+        expect(action).to eql('CREATE (n:User)')
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { subject_labels: %i[user customer] } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (n:Customer:User)')
+        expect(action).to eql('CREATE (n:Customer:User)')
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { type: :read } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (a)-[:READ]->(b)')
+        expect(action).to eql('CREATE (a)-[:READ]->(b)')
       end
     end
 
@@ -76,7 +76,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { predicate_type: :read } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (a)-[:READ]->(b)')
+        expect(action).to eql('CREATE (a)-[:READ]->(b)')
       end
     end
 
@@ -85,7 +85,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { predicate_types: %i[read write] } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (a)-[:READ|WRITE]->(b)')
+        expect(action).to eql('CREATE (a)-[:READ|WRITE]->(b)')
       end
     end
 
@@ -94,7 +94,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:replacements) { { name_str: 'Klaus' } }
 
       it 'returns the processed input string' do
-        expect(action).to be_eql('CREATE (n:User { name: "Klaus" })')
+        expect(action).to eql('CREATE (n:User { name: "Klaus" })')
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe Boltless::Extensions::Utilities do
 
       it 'returns the processed input string' do
         expect(action).to \
-          be_eql('CREATE (n:User { states: ["active", "locked"] })')
+          eql('CREATE (n:User { states: ["active", "locked"] })')
       end
     end
 
@@ -120,7 +120,7 @@ RSpec.describe Boltless::Extensions::Utilities do
 
       it 'returns the processed input string' do
         expect(action).to \
-          be_eql('CREATE (n:User)')
+          eql('CREATE (n:User)')
       end
     end
   end
@@ -129,69 +129,69 @@ RSpec.describe Boltless::Extensions::Utilities do
     context 'with a single string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('user')).to \
-          be_eql('User')
+          eql('User')
       end
     end
 
     context 'with multiple strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('user', 'payment')).to \
-          be_eql('Payment:User')
+          eql('Payment:User')
       end
     end
 
     context 'with nested strings' do
       it 'returns the escaped string' do
         res = described_class.prepare_label(['user'], [['payment']], 'session')
-        expect(res).to be_eql('Payment:Session:User')
+        expect(res).to eql('Payment:Session:User')
       end
     end
 
     context 'with some nasty strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('userv2', 'user+v2')).to \
-          be_eql('Userv2:`User+v2`')
+          eql('Userv2:`User+v2`')
       end
     end
 
     context 'with an underscored string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('payment_mandate')).to \
-          be_eql('PaymentMandate')
+          eql('PaymentMandate')
       end
     end
 
     context 'with an camel-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('paymentMandate')).to \
-          be_eql('PaymentMandate')
+          eql('PaymentMandate')
       end
     end
 
     context 'with an pascal-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('PaymentMandate')).to \
-          be_eql('PaymentMandate')
+          eql('PaymentMandate')
       end
     end
 
     context 'with an underscored symbol' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label(:payment_mandate)).to \
-          be_eql('PaymentMandate')
+          eql('PaymentMandate')
       end
     end
 
     context 'with an kabab-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_label('payment-mandate')).to \
-          be_eql('PaymentMandate')
+          eql('PaymentMandate')
       end
     end
 
     context 'with an boolean (false)' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_label(false)).to be_eql('False')
+        expect(described_class.prepare_label(false)).to eql('False')
       end
     end
 
@@ -207,7 +207,7 @@ RSpec.describe Boltless::Extensions::Utilities do
         res = described_class.prepare_label(
           [:a], [true, [false, ['"nice"', "o'neil"], nil]]
         )
-        expect(res).to be_eql("A:False:True:`\"nice\"`:`O'neil`")
+        expect(res).to eql("A:False:True:`\"nice\"`:`O'neil`")
       end
     end
 
@@ -215,7 +215,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       it 'returns the escaped string' do
         set = Set[:user, :payment, :session, true]
         expect(described_class.prepare_label(set)).to \
-          be_eql('Payment:Session:True:User')
+          eql('Payment:Session:True:User')
       end
     end
   end
@@ -224,69 +224,69 @@ RSpec.describe Boltless::Extensions::Utilities do
     context 'with a single string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('read')).to \
-          be_eql('READ')
+          eql('READ')
       end
     end
 
     context 'with multiple strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('read', 'write')).to \
-          be_eql('READ|WRITE')
+          eql('READ|WRITE')
       end
     end
 
     context 'with nested strings' do
       it 'returns the escaped string' do
         res = described_class.prepare_type(['read'], [['write']], 'delete')
-        expect(res).to be_eql('DELETE|READ|WRITE')
+        expect(res).to eql('DELETE|READ|WRITE')
       end
     end
 
     context 'with some nasty strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('userv2', 'user+v2')).to \
-          be_eql('USERV2|`USER+V2`')
+          eql('USERV2|`USER+V2`')
       end
     end
 
     context 'with an underscored string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('read_write')).to \
-          be_eql('READ_WRITE')
+          eql('READ_WRITE')
       end
     end
 
     context 'with an camel-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('readWrite')).to \
-          be_eql('READ_WRITE')
+          eql('READ_WRITE')
       end
     end
 
     context 'with an pascal-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('ReadWrite')).to \
-          be_eql('READ_WRITE')
+          eql('READ_WRITE')
       end
     end
 
     context 'with an underscored symbol' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type(:read_write)).to \
-          be_eql('READ_WRITE')
+          eql('READ_WRITE')
       end
     end
 
     context 'with an kabab-cased string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_type('read-write')).to \
-          be_eql('READ_WRITE')
+          eql('READ_WRITE')
       end
     end
 
     context 'with an boolean (false)' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_type(false)).to be_eql('FALSE')
+        expect(described_class.prepare_type(false)).to eql('FALSE')
       end
     end
 
@@ -302,14 +302,14 @@ RSpec.describe Boltless::Extensions::Utilities do
         res = described_class.prepare_type(
           [:a], [true, [false, ['"nice"', "o'neil"], nil], 1], 12.14
         )
-        expect(res).to be_eql("1|A|FALSE|TRUE|`\"NICE\"`|`12.14`|`O'NEIL`")
+        expect(res).to eql("1|A|FALSE|TRUE|`\"NICE\"`|`12.14`|`O'NEIL`")
       end
     end
 
     context 'with a set' do
       it 'returns the escaped string' do
         set = Set[:a, :b, :c, 1]
-        expect(described_class.prepare_type(set)).to be_eql('1|A|B|C')
+        expect(described_class.prepare_type(set)).to eql('1|A|B|C')
       end
     end
   end
@@ -318,45 +318,45 @@ RSpec.describe Boltless::Extensions::Utilities do
     context 'with a single string' do
       it 'returns the escaped string' do
         expect(described_class.prepare_string('super "cool" string')).to \
-          be_eql('"super \"cool\" string"')
+          eql('"super \"cool\" string"')
       end
     end
 
     context 'with multiple strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_string('a', 'b')).to \
-          be_eql('"a", "b"')
+          eql('"a", "b"')
       end
     end
 
     context 'with nested strings' do
       it 'returns the escaped string' do
         expect(described_class.prepare_string(['a'], [['b']], 'c')).to \
-          be_eql('"a", "b", "c"')
+          eql('"a", "b", "c"')
       end
     end
 
     context 'with an integer' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_string(1)).to be_eql('"1"')
+        expect(described_class.prepare_string(1)).to eql('"1"')
       end
     end
 
     context 'with an boolean (true)' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_string(true)).to be_eql('"true"')
+        expect(described_class.prepare_string(true)).to eql('"true"')
       end
     end
 
     context 'with an boolean (false)' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_string(false)).to be_eql('"false"')
+        expect(described_class.prepare_string(false)).to eql('"false"')
       end
     end
 
     context 'with nil' do
       it 'returns the escaped string' do
-        expect(described_class.prepare_string(nil)).to be_eql('""')
+        expect(described_class.prepare_string(nil)).to eql('""')
       end
     end
 
@@ -366,7 +366,7 @@ RSpec.describe Boltless::Extensions::Utilities do
           [:a], [true, [false, ['"nice"', "o'neil"], nil], 1], 12.14
         )
         expect(res).to \
-          be_eql('"a", "true", "false", "\"nice\"", "o\'neil", "1", "12.14"')
+          eql('"a", "true", "false", "\"nice\"", "o\'neil", "1", "12.14"')
       end
     end
 
@@ -374,7 +374,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       it 'returns the escaped string' do
         set = Set[:a, :b, :c, 1]
         expect(described_class.prepare_string(set)).to \
-          be_eql('"a", "b", "c", "1"')
+          eql('"a", "b", "c", "1"')
       end
     end
   end
@@ -400,7 +400,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:obj) { 'test' }
 
       it 'returns the Cypher options representation' do
-        expect(action).to be_eql(%('test'))
+        expect(action).to eql(%('test'))
       end
     end
 
@@ -408,7 +408,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:obj) { ['test', 1.9235, 2, true, nil] }
 
       it 'returns the Cypher options representation' do
-        expect(action).to be_eql(%([ 'test', 1.9235, 2, true ]))
+        expect(action).to eql(%([ 'test', 1.9235, 2, true ]))
       end
     end
 
@@ -416,13 +416,13 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:obj) { { symbol: true, 'string' => 1.234 } }
 
       it 'returns the Cypher options representation' do
-        expect(action).to be_eql(%({ `symbol`: true, `string`: 1.234 }))
+        expect(action).to eql(%({ `symbol`: true, `string`: 1.234 }))
       end
     end
 
     context 'with a complex nested structure' do
       it 'returns the Cypher options representation' do
-        expect(action).to be_eql(cypher_opts)
+        expect(action).to eql(cypher_opts)
       end
     end
   end
@@ -435,7 +435,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:args) { {} }
 
       it 'returns the untouched input string' do
-        expect(action).to be_eql(cypher)
+        expect(action).to eql(cypher)
       end
     end
 
@@ -444,7 +444,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:args) { {} }
 
       it 'returns the untouched input string' do
-        expect(action).to be_eql(cypher)
+        expect(action).to eql(cypher)
       end
     end
 
@@ -453,7 +453,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:args) { { name: 'Peter' } }
 
       it 'returns the resolved string' do
-        expect(action).to be_eql('CREATE (n:User { name: "Peter" })')
+        expect(action).to eql('CREATE (n:User { name: "Peter" })')
       end
     end
 
@@ -463,7 +463,7 @@ RSpec.describe Boltless::Extensions::Utilities do
 
       it 'returns the resolved string' do
         expect(action).to \
-          be_eql('CREATE (n:User { name: $name, email: "peter@example.com" })')
+          eql('CREATE (n:User { name: $name, email: "peter@example.com" })')
       end
     end
   end
@@ -475,7 +475,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'BEGIN' }
 
       it 'returns magenta' do
-        expect(action).to be_eql(:magenta)
+        expect(action).to be(:magenta)
       end
     end
 
@@ -483,7 +483,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'CREATE (n:User { name: $name })' }
 
       it 'returns green' do
-        expect(action).to be_eql(:green)
+        expect(action).to be(:green)
       end
     end
 
@@ -491,7 +491,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'MERGE (n:User { name: $name })' }
 
       it 'returns yellow' do
-        expect(action).to be_eql(:yellow)
+        expect(action).to be(:yellow)
       end
     end
 
@@ -499,7 +499,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'MATCH (n:User { name: $name }) SET n.email = $email' }
 
       it 'returns yellow' do
-        expect(action).to be_eql(:yellow)
+        expect(action).to be(:yellow)
       end
     end
 
@@ -507,7 +507,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'MATCH (n:User { name: $name }) DELETE n' }
 
       it 'returns red' do
-        expect(action).to be_eql(:red)
+        expect(action).to be(:red)
       end
     end
 
@@ -515,7 +515,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'MATCH (n:User { name: $name }) REMOVE n.email' }
 
       it 'returns red' do
-        expect(action).to be_eql(:red)
+        expect(action).to be(:red)
       end
     end
 
@@ -523,7 +523,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'COMMIT' }
 
       it 'returns green' do
-        expect(action).to be_eql(:green)
+        expect(action).to be(:green)
       end
     end
 
@@ -531,7 +531,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'ROLLBACK' }
 
       it 'returns red' do
-        expect(action).to be_eql(:red)
+        expect(action).to be(:red)
       end
     end
 
@@ -539,7 +539,7 @@ RSpec.describe Boltless::Extensions::Utilities do
       let(:cypher) { 'MATCH (n:User { name: $name }) RETURN n.email' }
 
       it 'returns light blue' do
-        expect(action).to be_eql(:light_blue)
+        expect(action).to be(:light_blue)
       end
     end
   end

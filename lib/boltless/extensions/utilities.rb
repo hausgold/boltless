@@ -45,7 +45,7 @@ module Boltless
         def build_cypher(**replacements)
           # Process the given replacements in order to prevent Cypher
           # injections from user given values
-          replacements = replacements \
+          replacements = replacements
                          .stringify_keys
                          .each_with_object({}) do |(key, val), memo|
             val = prepare_label(val) if key.match?(/_labels?$|^labels?$/)
@@ -75,7 +75,7 @@ module Boltless
           raise ArgumentError, "Bad labels: #{inputs.inspect}" if list.empty?
 
           list.map do |input|
-            res = input.to_s.underscore.gsub(/-/, '_').camelcase
+            res = input.to_s.underscore.gsub('-', '_').camelcase
             res.match?(/[^a-z0-9]/i) ? "`#{res}`" : res
           end.sort.uniq.join(':')
         end
@@ -91,7 +91,7 @@ module Boltless
           raise ArgumentError, "Bad types: #{inputs.inspect}" if list.empty?
 
           list.map do |input|
-            res = input.to_s.underscore.gsub(/-/, '_').upcase
+            res = input.to_s.underscore.gsub('-', '_').upcase
             res.match?(/[^a-z0-9_]/i) ? "`#{res}`" : res
           end.sort.uniq.join('|')
         end
@@ -106,7 +106,7 @@ module Boltless
           return %("") if inputs.empty?
 
           inputs.map do |input|
-            "\"#{input.to_s.gsub(/"/, '\"')}\""
+            "\"#{input.to_s.gsub('"', '\"')}\""
           end.uniq.join(', ')
         end
 

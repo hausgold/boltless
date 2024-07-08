@@ -38,37 +38,37 @@ RSpec.describe Boltless::Extensions::ConnectionPool do
     it 'returns a configured HTTP client (pool size)' do
       Boltless.configuration.connection_pool_size = 1
       reload.call
-      expect(action.size).to be_eql(1)
+      expect(action.size).to be(1)
     end
 
     it 'returns a configured HTTP client (connection aquire timeout)' do
       Boltless.configuration.connection_pool_timeout = 1
       reload.call
-      expect(action.instance_variable_get(:@timeout)).to be_eql(1)
+      expect(action.instance_variable_get(:@timeout)).to be(1)
     end
 
     it 'returns a configured HTTP client (persistent base URL)' do
       Boltless.configuration.base_url = 'http://test:1234'
       reload.call
-      expect(options.persistent).to be_eql('http://test:1234')
+      expect(options.persistent).to eql('http://test:1234')
     end
 
     it 'returns a configured HTTP client (username)' do
       Boltless.configuration.username = 'test'
       reload.call
-      expect(auth.first).to be_eql('test')
+      expect(auth.first).to eql('test')
     end
 
     it 'returns a configured HTTP client (password)' do
       Boltless.configuration.password = 'test'
       reload.call
-      expect(auth.last).to be_eql('test')
+      expect(auth.last).to eql('test')
     end
 
     it 'returns a configured HTTP client (request timeout)' do
       Boltless.configuration.request_timeout = 7
       reload.call
-      expect(options.timeout_options[:global_timeout]).to be_eql(7)
+      expect(options.timeout_options[:global_timeout]).to be(7)
     end
 
     it 'allows send requests' do

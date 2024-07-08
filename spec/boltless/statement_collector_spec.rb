@@ -7,7 +7,7 @@ RSpec.describe Boltless::StatementCollector do
 
   describe 'delegations' do
     it 'allows to access the #build_cypher utility' do
-      expect(instance.respond_to?(:build_cypher)).to be_eql(true)
+      expect(instance.respond_to?(:build_cypher)).to be(true)
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe Boltless::StatementCollector do
     it 'collects the given statements' do
       action.call
       action.call
-      expect(instance.statements.count).to be_eql(2)
+      expect(instance.statements.count).to be(2)
     end
 
     it 'calls Request.statement_payload to prepare the statement' do

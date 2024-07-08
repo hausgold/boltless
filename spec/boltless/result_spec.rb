@@ -19,11 +19,11 @@ RSpec.describe Boltless::Result do
     end
 
     it 'returns the correct count of rows (via reader)' do
-      expect(action.rows.count).to be_eql(2)
+      expect(action.rows.count).to be(2)
     end
 
     it 'returns the correct count of rows (directly)' do
-      expect(action.count).to be_eql(2)
+      expect(action.count).to be(2)
     end
 
     context 'with statistics' do
@@ -55,7 +55,7 @@ RSpec.describe Boltless::Result do
 
   describe '#value' do
     it 'returns the correct value' do
-      expect(instance.value).to be_eql('Bernd')
+      expect(instance.value).to eql('Bernd')
     end
   end
 

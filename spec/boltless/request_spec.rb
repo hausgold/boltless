@@ -82,22 +82,22 @@ RSpec.describe Boltless::Request do
     end
 
     it 'returns 4 results' do
-      expect(action.count).to be_eql(4)
+      expect(action.count).to be(4)
     end
 
     it 'returns the expected results (first 3)' do
-      expect(action[0..2].map(&:count)).to all(be_eql(0))
+      expect(action[0..2].map(&:count)).to all(eql(0))
     end
 
     it 'returns the expected results (last)' do
-      expect(action.last.value).to be_eql('Bernd')
+      expect(action.last.value).to eql('Bernd')
     end
 
     it 'does not write the data actually' do
       count = instance.one_shot_transaction(
         { statement: 'MATCH (n:User) RETURN count(n)' }
       ).first.value
-      expect(count).to be_eql(0)
+      expect(count).to be(0)
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe Boltless::Request do
     end
 
     it 'returns an array with the converted statements' do
-      expect(action.call(['a', { a: true }], ['b', {}]).count).to be_eql(2)
+      expect(action.call(['a', { a: true }], ['b', {}]).count).to be(2)
     end
 
     it 'returns an array of converted statement Hashes' do
@@ -184,8 +184,7 @@ RSpec.describe Boltless::Request do
     let(:req_body) { { statements: statements }.to_json }
 
     before do
-      allow(connection).to receive(:headers).and_return(connection)
-      allow(connection).to receive(:post).and_return(response)
+      allow(connection).to receive_messages(headers: connection, post: response)
     end
 
     context 'without statements' do
@@ -224,8 +223,7 @@ RSpec.describe Boltless::Request do
     let(:body) { '{}' }
 
     before do
-      allow(connection).to receive(:headers).and_return(connection)
-      allow(connection).to receive(:post).and_return(response)
+      allow(connection).to receive_messages(headers: connection, post: response)
     end
 
     it 'sets the correct access mode header' do
@@ -259,7 +257,7 @@ RSpec.describe Boltless::Request do
       let(:headers) { { 'location' => 'http://neo4j:7474/db/neo4j/tx/3894' } }
 
       it 'returns the correct transaction identifier' do
-        expect(action.call).to be_eql(3894)
+        expect(action.call).to be(3894)
       end
     end
 
@@ -614,7 +612,7 @@ RSpec.describe Boltless::Request do
 
       it 'passes over the raw response body' do
         Boltless.configuration.raw_response_handler = proc do |body, _res|
-          expect(body).to be_eql('{"test":true}')
+          expect(body).to eql('{"test":true}')
           body
         end
         action
@@ -635,19 +633,19 @@ RSpec.describe Boltless::Request do
 
     context 'with an Array' do
       it 'returns the expected JSON representation' do
-        expect(action[[1, [2]]]).to be_eql('[1,[2]]')
+        expect(action[[1, [2]]]).to eql('[1,[2]]')
       end
     end
 
     context 'with a Hash' do
       it 'returns the expected JSON representation' do
-        expect(action[{ a: { b: true } }]).to be_eql('{"a":{"b":true}}')
+        expect(action[{ a: { b: true } }]).to eql('{"a":{"b":true}}')
       end
     end
 
     context 'with a String' do
       it 'returns the expected JSON representation' do
-        expect(action['test']).to be_eql('"test"')
+        expect(action['test']).to eql('"test"')
       end
     end
   end
@@ -690,7 +688,7 @@ RSpec.describe Boltless::Request do
       end
 
       it 'returns the result of the user block' do
-        expect(action.call).to be_eql(923)
+        expect(action.call).to be(923)
       end
 
       it 'does not change the request counter' do
@@ -712,7 +710,7 @@ RSpec.describe Boltless::Request do
       end
 
       it 'returns the result of the user block' do
-        expect(action.call).to be_eql(923)
+        expect(action.call).to be(923)
       end
 
       it 'change the request counter' do
@@ -777,7 +775,7 @@ RSpec.describe Boltless::Request do
       end
 
       it 'returns the result of the user block' do
-        expect(action.call).to be_eql(923)
+        expect(action.call).to be(923)
       end
 
       it 'calls the logger twice' do
@@ -917,7 +915,7 @@ RSpec.describe Boltless::Request do
 
     context 'with a single statement' do
       it 'returns a string with a single line' do
-        expect(action.lines.count).to be_eql(1)
+        expect(action.lines.count).to be(1)
       end
 
       it 'resolves the Cypher statement with the parameters' do
@@ -940,7 +938,7 @@ RSpec.describe Boltless::Request do
       end
 
       it 'returns a string with two lines' do
-        expect(action.lines.count).to be_eql(2)
+        expect(action.lines.count).to be(2)
       end
 
       it 'resolves the Cypher statement with the parameters (1)' do
