@@ -1,5 +1,9 @@
 ### next
 
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 1.4.0
+
 * Moved the development dependencies from the gemspec to the Gemfile (#4)
 * Dropped support for Ruby <2.7 (#5)
 
