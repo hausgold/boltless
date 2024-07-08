@@ -8,29 +8,29 @@ RSpec.describe Boltless::ResultRow do
 
   describe '#[]' do
     it 'allows direct key access to the row data (string key)' do
-      expect(instance['active']).to be_eql(true)
+      expect(instance['active']).to be(true)
     end
 
     it 'allows direct key access to the row data (symbol key)' do
-      expect(instance[:active]).to be_eql(true)
+      expect(instance[:active]).to be(true)
     end
 
     it 'returns the expected value (name)' do
-      expect(instance[:name]).to be_eql('Bernd')
+      expect(instance[:name]).to eql('Bernd')
     end
 
     it 'returns the expected value (birthday)' do
-      expect(instance[:birthday]).to be_eql(Date.parse('1971-07-28'))
+      expect(instance[:birthday]).to eql(Date.parse('1971-07-28'))
     end
 
     it 'returns the expected value (written_books)' do
-      expect(instance[:written_books]).to be_eql(2)
+      expect(instance[:written_books]).to be(2)
     end
   end
 
   describe '#value' do
     it 'returns the first value of the row' do
-      expect(instance.value).to be_eql(instance.values.first)
+      expect(instance.value).to eql(instance.values.first)
     end
   end
 

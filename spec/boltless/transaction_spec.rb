@@ -41,7 +41,7 @@ RSpec.describe Boltless::Transaction do
 
     it 'rolls back the transaction on errors' do
       failed_action
-      expect(check_action.count).to be_eql(0)
+      expect(check_action.count).to be(0)
     end
 
     it 'returns a mapped result' do
@@ -69,7 +69,7 @@ RSpec.describe Boltless::Transaction do
 
   describe 'delegations' do
     it 'allows to access the #build_cypher utility' do
-      expect(instance.respond_to?(:build_cypher)).to be_eql(true)
+      expect(instance.respond_to?(:build_cypher)).to be(true)
     end
   end
 
@@ -114,7 +114,7 @@ RSpec.describe Boltless::Transaction do
 
     context 'when not explictly configured' do
       it 'returns write' do
-        expect(action).to be_eql(:write)
+        expect(action).to be(:write)
       end
     end
 
@@ -122,7 +122,7 @@ RSpec.describe Boltless::Transaction do
       let(:instance) { new_instance[access_mode: :read] }
 
       it 'returns read' do
-        expect(action).to be_eql(:read)
+        expect(action).to be(:read)
       end
     end
 
@@ -130,7 +130,7 @@ RSpec.describe Boltless::Transaction do
       let(:instance) { new_instance[access_mode: :write] }
 
       it 'returns write' do
-        expect(action).to be_eql(:write)
+        expect(action).to be(:write)
       end
     end
   end
@@ -162,7 +162,7 @@ RSpec.describe Boltless::Transaction do
 
     describe 'after initialization' do
       it 'returns not_yet_started' do
-        expect(action).to be_eql(:not_yet_started)
+        expect(action).to be(:not_yet_started)
       end
     end
   end
@@ -176,7 +176,7 @@ RSpec.describe Boltless::Transaction do
 
     describe 'after initialization' do
       it 'returns not_yet_started' do
-        expect(action).to be_eql('not_yet_started')
+        expect(action).to eql('not_yet_started')
       end
     end
   end
@@ -203,7 +203,7 @@ RSpec.describe Boltless::Transaction do
     end
 
     it 'returns true' do
-      expect(action).to be_eql(true)
+      expect(action).to be(true)
     end
 
     it 'switches the state to open' do
@@ -219,7 +219,7 @@ RSpec.describe Boltless::Transaction do
       let(:raw_state) { :closed }
 
       it 'returns false' do
-        expect(action).to be_eql(false)
+        expect(action).to be(false)
       end
     end
 
@@ -232,7 +232,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(instance).to receive(:begin!, &res_err) }
 
       it 'returns false' do
-        expect(action).to be_eql(false)
+        expect(action).to be(false)
       end
     end
 
@@ -240,7 +240,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(request).to receive(:begin_transaction) }
 
       it 'returns true' do
-        expect(action).to be_eql(true)
+        expect(action).to be(true)
       end
 
       it 'switches the state to open' do
@@ -274,7 +274,7 @@ RSpec.describe Boltless::Transaction do
 
       it 'returns the result' do
         res = instance.run!('RETURN date() AS date')
-        expect(res.value).to be_eql(Date.today.to_s)
+        expect(res.value).to eql(Date.today.to_s)
       end
     end
   end
@@ -287,7 +287,7 @@ RSpec.describe Boltless::Transaction do
       let(:raw_state) { :closed }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -300,7 +300,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(instance).to receive(:run!, &res_err) }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -308,7 +308,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(request).to receive(:run_query).and_return([123]) }
 
       it 'returns an the first result' do
-        expect(action).to be_eql(123)
+        expect(action).to be(123)
       end
     end
   end
@@ -348,15 +348,15 @@ RSpec.describe Boltless::Transaction do
       end
 
       it 'returns two results (one for each statement)' do
-        expect(action.count).to be_eql(2)
+        expect(action.count).to be(2)
       end
 
       it 'returns the correct result (first statement)' do
-        expect(action.first.value).to be_eql(1)
+        expect(action.first.value).to be(1)
       end
 
       it 'returns the correct result (second statement)' do
-        expect(action.last.value).to be_eql(Date.today.to_s)
+        expect(action.last.value).to eql(Date.today.to_s)
       end
     end
   end
@@ -369,7 +369,7 @@ RSpec.describe Boltless::Transaction do
       let(:raw_state) { :closed }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -382,7 +382,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(instance).to receive(:run_in_batch!, &res_err) }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -419,7 +419,7 @@ RSpec.describe Boltless::Transaction do
 
       it 'allows to send finalizing statements' do
         res = instance.commit!(['RETURN date() AS date'])
-        expect(res.first.value).to be_eql(Date.today.to_s)
+        expect(res.first.value).to eql(Date.today.to_s)
       end
 
       it 'switches the state to closed' do
@@ -437,7 +437,7 @@ RSpec.describe Boltless::Transaction do
       let(:raw_state) { :closed }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -450,7 +450,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(instance).to receive(:commit!, &res_err) }
 
       it 'returns nil' do
-        expect(action).to be_eql(nil)
+        expect(action).to be_nil
       end
     end
 
@@ -491,7 +491,7 @@ RSpec.describe Boltless::Transaction do
       end
 
       it 'returns true' do
-        expect(action).to be_eql(true)
+        expect(action).to be(true)
       end
 
       it 'switches the state to closed' do
@@ -509,7 +509,7 @@ RSpec.describe Boltless::Transaction do
       let(:raw_state) { :closed }
 
       it 'returns false' do
-        expect(action).to be_eql(false)
+        expect(action).to be(false)
       end
     end
 
@@ -522,7 +522,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(instance).to receive(:rollback!, &res_err) }
 
       it 'returns false' do
-        expect(action).to be_eql(false)
+        expect(action).to be(false)
       end
     end
 
@@ -530,7 +530,7 @@ RSpec.describe Boltless::Transaction do
       before { allow(request).to receive(:rollback_transaction) }
 
       it 'returns true' do
-        expect(action).to be_eql(true)
+        expect(action).to be(true)
       end
 
       it 'switches the state to closed' do
@@ -561,16 +561,16 @@ RSpec.describe Boltless::Transaction do
     end
 
     it 'returns the given error result in case of errors (non-proc)' do
-      expect(action.call(true, &res_err)).to be_eql(true)
+      expect(action.call(true, &res_err)).to be(true)
     end
 
     it 'returns the given error result in case of errors (proc)' do
       err_res = ->(e) { "Err: #{e.message}" }
-      expect(action.call(err_res, &res_err)).to be_eql('Err: test')
+      expect(action.call(err_res, &res_err)).to eql('Err: test')
     end
 
     it 'returns the result of the user given block when no errors occur' do
-      expect(action.call { 123 }).to be_eql(123)
+      expect(action.call { 123 }).to be(123)
     end
 
     it 'switches the state to closed on errors' do

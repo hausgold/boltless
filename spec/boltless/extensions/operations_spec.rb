@@ -83,21 +83,21 @@ RSpec.describe Boltless::Extensions::Operations do
     context 'with an known index' do
       it 'returns true' do
         expect(described_class.component_name_present?('user_id')).to \
-          be_eql(true)
+          be(true)
       end
     end
 
     context 'with an known constraint' do
       it 'returns true' do
         expect(described_class.component_name_present?('uniq_user_email')).to \
-          be_eql(true)
+          be(true)
       end
     end
 
     context 'with an unknown name' do
       it 'returns false' do
         expect(described_class.component_name_present?('unknown')).to \
-          be_eql(false)
+          be(false)
       end
     end
   end

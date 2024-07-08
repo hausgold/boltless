@@ -151,7 +151,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -166,11 +166,11 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns 4 results (one for each statement)' do
-        expect(action.count).to be_eql(4)
+        expect(action.count).to be(4)
       end
 
       it 'returns the correct created user count' do
-        expect(action.last.value).to be_eql(3)
+        expect(action.last.value).to be(3)
       end
     end
   end
@@ -199,7 +199,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -214,11 +214,11 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns 4 results (one for each statement)' do
-        expect(action.count).to be_eql(4)
+        expect(action.count).to be(4)
       end
 
       it 'returns the correct created user count' do
-        expect(action.last.value).to be_eql(3)
+        expect(action.last.value).to be(3)
       end
     end
   end
@@ -247,7 +247,7 @@ RSpec.describe Boltless::Extensions::Transactions do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
         expect(described_class.execute!(cypher, **args).value).to \
-          be_eql(0)
+          be(0)
       end
     end
 
@@ -261,13 +261,13 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns true' do
-        expect(action).to be_eql(true)
+        expect(action).to be(true)
       end
 
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -287,7 +287,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'completed the transaction (data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(1)
+        expect(described_class.execute!(cypher, **args).value).to be(1)
       end
     end
 
@@ -298,10 +298,10 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'allows direct access to each result' do
         Boltless.transaction! do |tx|
           cypher, args = fetch_date_statement
-          expect(tx.run!(cypher, **args).value).to be_eql(Date.today.to_s)
+          expect(tx.run!(cypher, **args).value).to eql(Date.today.to_s)
 
           cypher, args = fetch_static_number_statement
-          expect(tx.run!(cypher, **args).value).to be_eql(9867)
+          expect(tx.run!(cypher, **args).value).to be(9867)
         end
       end
       # rubocop:enable RSpec/MultipleExpectations
@@ -330,7 +330,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -354,7 +354,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -368,13 +368,13 @@ RSpec.describe Boltless::Extensions::Transactions do
       end
 
       it 'returns true' do
-        expect(action).to be_eql(true)
+        expect(action).to be(true)
       end
 
       it 'rolls back the transaction (no data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(0)
+        expect(described_class.execute!(cypher, **args).value).to be(0)
       end
     end
 
@@ -394,7 +394,7 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'completed the transaction (data is written)' do
         suppress(StandardError) { action }
         cypher, args = count_users_statement
-        expect(described_class.execute!(cypher, **args).value).to be_eql(1)
+        expect(described_class.execute!(cypher, **args).value).to be(1)
       end
     end
 
@@ -405,10 +405,10 @@ RSpec.describe Boltless::Extensions::Transactions do
       it 'allows direct access to each result' do
         Boltless.transaction do |tx|
           cypher, args = fetch_date_statement
-          expect(tx.run(cypher, **args).value).to be_eql(Date.today.to_s)
+          expect(tx.run(cypher, **args).value).to eql(Date.today.to_s)
 
           cypher, args = fetch_static_number_statement
-          expect(tx.run(cypher, **args).value).to be_eql(9867)
+          expect(tx.run(cypher, **args).value).to be(9867)
         end
       end
       # rubocop:enable RSpec/MultipleExpectations
