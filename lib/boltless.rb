@@ -31,6 +31,6 @@ module Boltless
   include Extensions::Operations
   include Extensions::Utilities
 
-  # Make sure to eager load all SDK constants
+  # Make sure to eager load all constants
   loader.eager_load
 end
