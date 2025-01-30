@@ -100,12 +100,12 @@ RSpec.describe Boltless::ResultRow do
     end
 
     it 'includes the values' do
-      expect(action).to include('values=[{:name=>"Klaus"}]')
+      expect(action).to include(/values=\[{:?name(=>|: )"Klaus"}\]/)
     end
 
     it 'includes the meta' do
-      expect(action).to \
-        include('meta=[{:id=>146, :type=>"node", :deleted=>false}]')
+      parts = [':?id(=>|: )146', ':?type(=>|: )"node"', ':?deleted(=>|: )false']
+      expect(action).to include(/meta=\[{#{parts.join(', ')}}\]/)
     end
 
     it 'includes the graph' do
@@ -143,18 +143,18 @@ RSpec.describe Boltless::ResultRow do
       let(:input) { raw_result_fixture(:with_graph_result) }
 
       it 'includes the graph (key)' do
-        expect(action).to include('graph={:nodes=>')
+        expect(action).to include(/graph={:?nodes(=>|: )/)
       end
 
       it 'includes the graph (nodes)' do
-        expect(action).to \
-          include('[{:id=>"149", :labels=>["User"], ' \
-                  ':properties=>{:name=>"Kalle"}}]')
+        parts = [':?id(=>|: )"149"', ':?labels(=>|: )\["User"\]',
+                 ':?properties(=>|: ){:?name(=>|: )"Kalle"}']
+        expect(action).to include(/\[{#{parts.join(', ')}}\]/)
       end
 
       it 'includes the graph (relationships)' do
         expect(action).to \
-          include(':relationships=>[]')
+          include(/:?relationships(=>|: )\[\]/)
       end
     end
   end

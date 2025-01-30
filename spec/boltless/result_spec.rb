@@ -99,7 +99,7 @@ RSpec.describe Boltless::Result do
     end
 
     it 'includes the stats' do
-      expect(action).to include('stats={:contains_updates=>true')
+      expect(action).to include(/stats={:?contains_updates(=>|: )true/)
     end
   end
 
