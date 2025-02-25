@@ -5,8 +5,8 @@ module Boltless
   # persistent connection for its whole runtime. This connection is strictly
   # owned by a single request object. It is not safe to share it.
   #
-  # rubocop:disable Metrics/ClassLength because of the isolated
-  #   request abstraction
+  # rubocop:disable Metrics/ClassLength -- because of the isolated request
+  #   abstraction
   class Request
     class << self
       # Convert a multiple Cypher queries and +Hash+ arguments into multiple
@@ -102,9 +102,9 @@ module Boltless
     # @raise [Errors::TransactionBeginError] when we fail to start a
     #   new transaction
     #
-    # rubocop:disable Metrics/MethodLength because of the error
-    #   handlings and transaction identifier parsing
-    # rubocop:disable Metrics/AbcSize dito
+    # rubocop:disable Metrics/MethodLength -- because of the error handlings
+    #   and transaction identifier parsing
+    # rubocop:disable Metrics/AbcSize -- dito
     def begin_transaction
       log_query(:begin, Request.statement_payload('BEGIN')) do
         handle_transport_errors do
@@ -234,9 +234,9 @@ module Boltless
     #   error in the response, so we assume the transaction was rolled back
     #   by neo4j
     #
-    # rubocop:disable Metrics/MethodLength because of the result
-    #   handling (error, raw result, restructured result)
-    # rubocop:disable Metrics/AbcSize dito
+    # rubocop:disable Metrics/MethodLength -- because of the result handling
+    #   (error, raw result, restructured result)
+    # rubocop:disable Metrics/AbcSize -- dito
     def handle_response_body(res, tx_id: nil)
       # Parse the response body as a whole, which is returned by
       # the configured raw response handler
@@ -306,8 +306,8 @@ module Boltless
     # @yield the given user block
     # @return [Mixed] the result of the user given block
     #
-    # rubocop:disable Metrics/MethodLength because of the
-    #   configuration handling
+    # rubocop:disable Metrics/MethodLength -- because of the configuration
+    #   handling
     def log_query(tx_id, *statements)
       # When no query logging is enabled, we won't do it
       enabled = Boltless.configuration.query_log_enabled
@@ -357,9 +357,9 @@ module Boltless
     # @param statements [Array<Hash>] the Cypher statements to run
     # @return [String] the assembled logging string
     #
-    # rubocop:disable Metrics/MethodLength because of the complex
-    #   logging string assembling/formatting
-    # rubocop:disable Metrics/AbcSize dito
+    # rubocop:disable Metrics/MethodLength -- because of the complex logging
+    #   string assembling/formatting
+    # rubocop:disable Metrics/AbcSize -- dito
     def generate_log_str(tx_id, duration, *statements)
       dur = "(#{duration}ms)".colorize(color: :magenta, mode: :bold) \
         if duration

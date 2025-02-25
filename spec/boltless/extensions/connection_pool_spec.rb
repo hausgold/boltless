@@ -23,7 +23,7 @@ RSpec.describe Boltless::Extensions::ConnectionPool do
       Base64.decode64(options.headers['Authorization'].split.last).split(':')
     end
 
-    # rubocop:disable RSpec/IdenticalEqualityAssertion because we want to
+    # rubocop:disable RSpec/IdenticalEqualityAssertion -- because we want to
     #   check for a memoized result
     it 'returns a memoized connection pool instance' do
       expect(described_class.connection_pool).to \

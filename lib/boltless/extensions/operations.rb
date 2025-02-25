@@ -4,8 +4,8 @@ module Boltless
   module Extensions
     # A top-level gem-module extension for neo4j operations.
     #
-    # rubocop:disable Metrics/BlockLength because this is how
-    #   an +ActiveSupport::Concern+ looks like
+    # rubocop:disable Metrics/BlockLength -- because this is how an
+    #   +ActiveSupport::Concern+ looks like
     module Operations
       extend ActiveSupport::Concern
 
@@ -16,11 +16,11 @@ module Boltless
         #
         # @param database [String, Symbol] the neo4j database to use
         #
-        # rubocop:disable Metrics/MethodLength because of
-        #   multiple transactions
-        # rubocop:disable Metrics/AbcSize because of the extra transaction
-        #   handlings (we cannot do multiple structural changes in a single
-        #   transaction)
+        # rubocop:disable Metrics/MethodLength -- because of multiple
+        #   transactions
+        # rubocop:disable Metrics/AbcSize -- because of the extra transaction
+        #   handlings (we cannot do multiple structural changes in
+        #   a single transaction)
         def clear_database!(database: Boltless.configuration.default_db)
           logger.warn('Clear neo4j database ..')
 
@@ -100,7 +100,7 @@ module Boltless
         # @param on [String] the collection of nodes/properties to index
         # @param database [String, Symbol] the neo4j database to use
         #
-        # rubocop:disable Metrics/ParameterLists because of the various
+        # rubocop:disable Metrics/ParameterLists -- because of the various
         #   configuration options of a neo4j index
         def add_index(name:, for:, on:, type: :btree, options: nil,
                       database: Boltless.configuration.default_db)
