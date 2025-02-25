@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# rubocop:disable RSpec/NestedGroups because nesting makes sense here
+# rubocop:disable RSpec/NestedGroups -- because nesting makes sense here
 RSpec.describe Boltless::Request do
   let(:new_instance) { ->(**args) { described_class.new(connection, **args) } }
   let(:instance) { new_instance.call }

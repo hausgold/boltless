@@ -4,8 +4,8 @@ module Boltless
   module Extensions
     # A top-level gem-module extension add helpers and utilites.
     #
-    # rubocop:disable Metrics/BlockLength because this is how
-    #   an +ActiveSupport::Concern+ looks like
+    # rubocop:disable Metrics/BlockLength -- because this is how an
+    #   +ActiveSupport::Concern+ looks like
     module Utilities
       extend ActiveSupport::Concern
 
@@ -39,9 +39,9 @@ module Boltless
         #   template
         # @return [String] the built Cypher query
         #
-        # rubocop:disable Metrics/MethodLength because of the various
+        # rubocop:disable Metrics/MethodLength -- because of the various
         #   replacement strategies
-        # rubocop:disable Metrics/AbcSize dito
+        # rubocop:disable Metrics/AbcSize -- dito
         def build_cypher(**replacements)
           # Process the given replacements in order to prevent Cypher
           # injections from user given values
@@ -157,7 +157,7 @@ module Boltless
         # @param cypher [String] the Cypher query to check
         # @return [Symbol] the ANSI color name
         #
-        # rubocop:disable Metrics/CyclomaticComplexity because of the
+        # rubocop:disable Metrics/CyclomaticComplexity -- because of the
         #   various conditions
         def cypher_logging_color(cypher)
           cypher = cypher.to_s.downcase.lines.map(&:strip)

@@ -292,9 +292,9 @@ RSpec.describe Boltless::Extensions::Transactions do
     end
 
     context 'with intermediate results' do
-      # rubocop:disable RSpec/MultipleExpectations because of the
-      #   in-block testing
-      # rubocop:disable RSpec/ExampleLength dito
+      # rubocop:disable RSpec/MultipleExpectations -- because of the in-block
+      #   testing
+      # rubocop:disable RSpec/ExampleLength -- dito
       it 'allows direct access to each result' do
         Boltless.transaction! do |tx|
           cypher, args = fetch_date_statement
@@ -399,9 +399,9 @@ RSpec.describe Boltless::Extensions::Transactions do
     end
 
     context 'with intermediate results' do
-      # rubocop:disable RSpec/MultipleExpectations because of the
-      #   in-block testing
-      # rubocop:disable RSpec/ExampleLength dito
+      # rubocop:disable RSpec/MultipleExpectations -- because of the in-block
+      #   testing
+      # rubocop:disable RSpec/ExampleLength -- dito
       it 'allows direct access to each result' do
         Boltless.transaction do |tx|
           cypher, args = fetch_date_statement

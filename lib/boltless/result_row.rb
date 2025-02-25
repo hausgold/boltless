@@ -3,8 +3,8 @@
 module Boltless
   # A lightweight result row, used for convenient result data access.
   #
-  # rubocop:disable Lint/StructNewOverride because we have an
-  #   own implementation for +#values+
+  # rubocop:disable Lint/StructNewOverride -- because we have an own
+  #   implementation for +#values+
   ResultRow = Struct.new(:result, :values, :meta, :graph) do
     # A simple shortcut to easily access the row columns
     delegate :columns, to: :result

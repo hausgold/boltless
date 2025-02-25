@@ -5,9 +5,9 @@ module Boltless
     # A top-level gem-module extension to add easy-to-use methods to use the
     # Cypher transactional API.
     #
-    # rubocop:disable Metrics/BlockLength because this is how
-    #   an +ActiveSupport::Concern+ looks like
-    # rubocop:disable Metrics/ModuleLength dito
+    # rubocop:disable Metrics/BlockLength -- because this is how an
+    #   +ActiveSupport::Concern+ looks like
+    # rubocop:disable Metrics/ModuleLength -- dito
     module Transactions
       extend ActiveSupport::Concern
 
@@ -149,8 +149,8 @@ module Boltless
         #
         # @raise [Mixed] when an exception occurs inside the user given block
         #
-        # rubocop:disable Metrics/MethodLength because of the extra
-        #   error handling
+        # rubocop:disable Metrics/MethodLength -- because of the extra error
+        #   handling
         def one_shot(access_mode = :write,
                      database: Boltless.configuration.default_db,
                      raw_results: false)
@@ -196,7 +196,7 @@ module Boltless
         # @raise [Mixed] when an exception occurs inside the user given
         #   block, we re-raise it
         #
-        # rubocop:disable Metrics/MethodLength because this is the workflow
+        # rubocop:disable Metrics/MethodLength -- because this is the workflow
         def transaction!(access_mode = :write,
                          database: Boltless.configuration.default_db,
                          raw_results: false)
@@ -251,7 +251,7 @@ module Boltless
         # @raise [Mixed] when an exception occurs inside the user given
         #   block, we re-raise it
         #
-        # rubocop:disable Metrics/MethodLength because this is the workflow
+        # rubocop:disable Metrics/MethodLength -- because this is the workflow
         def transaction(access_mode = :write,
                         database: Boltless.configuration.default_db,
                         raw_results: false)
