@@ -1,7 +1,5 @@
-require:
-  - rubocop-rspec
-
 plugins:
+  - rubocop-rspec
   - rubocop-rails
 
 Rails:
@@ -71,7 +69,7 @@ RSpec/NestedGroups:
   Max: 4
 
 # Disable regular Rails spec paths.
-RSpec/FilePath:
+Rails/FilePath:
   Enabled: false
 
 # Because +enqueued_jobs+ is a method not a memoized variable,
