@@ -7,7 +7,7 @@ module Boltless
     #
     # rubocop:disable Metrics/BlockLength -- because this is how an
     #   +ActiveSupport::Concern+ looks like
-    # rubocop:disable Metrics/ModuleLength -- dito
+    # rubocop:disable Metrics/ModuleLength -- ditto
     module Transactions
       extend ActiveSupport::Concern
 

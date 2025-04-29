@@ -104,7 +104,7 @@ module Boltless
     #
     # rubocop:disable Metrics/MethodLength -- because of the error handlings
     #   and transaction identifier parsing
-    # rubocop:disable Metrics/AbcSize -- dito
+    # rubocop:disable Metrics/AbcSize -- ditto
     def begin_transaction
       log_query(:begin, Request.statement_payload('BEGIN')) do
         handle_transport_errors do
@@ -236,7 +236,7 @@ module Boltless
     #
     # rubocop:disable Metrics/MethodLength -- because of the result handling
     #   (error, raw result, restructured result)
-    # rubocop:disable Metrics/AbcSize -- dito
+    # rubocop:disable Metrics/AbcSize -- ditto
     def handle_response_body(res, tx_id: nil)
       # Parse the response body as a whole, which is returned by
       # the configured raw response handler
@@ -359,7 +359,7 @@ module Boltless
     #
     # rubocop:disable Metrics/MethodLength -- because of the complex logging
     #   string assembling/formatting
-    # rubocop:disable Metrics/AbcSize -- dito
+    # rubocop:disable Metrics/AbcSize -- ditto
     def generate_log_str(tx_id, duration, *statements)
       dur = "(#{duration}ms)".colorize(color: :magenta, mode: :bold) \
         if duration

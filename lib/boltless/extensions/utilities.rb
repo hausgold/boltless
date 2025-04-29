@@ -41,7 +41,7 @@ module Boltless
         #
         # rubocop:disable Metrics/MethodLength -- because of the various
         #   replacement strategies
-        # rubocop:disable Metrics/AbcSize -- dito
+        # rubocop:disable Metrics/AbcSize -- ditto
         def build_cypher(**replacements)
           # Process the given replacements in order to prevent Cypher
           # injections from user given values

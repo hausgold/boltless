@@ -22,7 +22,7 @@ module Boltless
         # @raise [HTTP::Error] in case the upstream server did not come up
         #
         # rubocop:disable Metrics/MethodLength -- because of the retry logic
-        # rubocop:disable Metrics/AbcSize -- dito
+        # rubocop:disable Metrics/AbcSize -- ditto
         def wait_for_server!(connection)
           # Check if the server already accepted connections
           return connection if @upstream_is_ready
@@ -76,7 +76,7 @@ module Boltless
         #
         # rubocop:disable Metrics/MethodLength -- because of the connection
         #   configuration
-        # rubocop:disable Metrics/AbcSize -- dito
+        # rubocop:disable Metrics/AbcSize -- ditto
         def connection_pool
           @connection_pool ||= begin
             conf = Boltless.configuration

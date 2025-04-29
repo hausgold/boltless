@@ -67,7 +67,7 @@ module Boltless
     #
     # rubocop:disable Metrics/MethodLength -- because of the pretty printing
     #   logic
-    # rubocop:disable Metrics/AbcSize -- dito
+    # rubocop:disable Metrics/AbcSize -- ditto
     def pretty_print(pp)
       pp.object_group(self) do
         pp.breakable
