@@ -59,6 +59,9 @@ module Boltless
     #
     # @raise [Errors::RequestError] when an error occurs, see request object
     #   for fine-grained details
+    #
+    # rubocop:disable Naming/PredicateMethod -- because this method performs an
+    #   action, not a predicate check (bool is for error signaling)
     def begin!
       # We do not allow messing around in wrong states
       unless @raw_state == :not_yet_started
@@ -70,6 +73,7 @@ module Boltless
       @raw_state = :open
       true
     end
+    # rubocop:enable Naming/PredicateMethod
 
     # Begin a new transaction. We rescue all errors transparently.
     #
@@ -180,6 +184,9 @@ module Boltless
     #
     # @raise [Errors::RequestError] when an error occurs, see request object
     #   for fine-grained details
+    #
+    # rubocop:disable Naming/PredicateMethod -- because this method performs
+    #   an action, not a predicate check (bool is for error signaling)
     def rollback!
       # We do not allow messing around in wrong states
       raise Errors::TransactionInBadStateError, 'Transaction not open' \
@@ -189,6 +196,7 @@ module Boltless
       @raw_state = :closed
       true
     end
+    # rubocop:enable Naming/PredicateMethod
 
     # Rollback this transaction. We rescue all errors transparently.
     #

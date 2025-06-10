@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'zeitwerk'
+require 'base64'
 require 'http'
 require 'connection_pool'
 require 'oj'
