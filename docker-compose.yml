@@ -1,4 +1,3 @@
-version: "3"
 services:
   neo4j:
     image: hausgold/neo4j:4.4
