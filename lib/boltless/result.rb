@@ -76,7 +76,7 @@ module Boltless
         pp.comma_breakable
 
         pp.text('rows=')
-        if rows.count > 1
+        if rows.many?
           pp.group(1, '[', ']') do
             pp.pp(first)
             pp.comma_breakable
