@@ -10,8 +10,8 @@ gemspec
 # Development dependencies
 gem 'appraisal', '~> 2.4'
 gem 'benchmark-ips', '~> 2.10'
-gem 'bundler', '~> 2.3'
-gem 'countless', '~> 1.1'
+gem 'bundler', '~> 2.6'
+gem 'countless', '~> 2.0'
 gem 'guard-rspec', '~> 4.7'
 gem 'irb', '~> 1.2'
 gem 'rspec', '~> 3.12'

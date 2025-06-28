@@ -82,7 +82,7 @@ $ gem install boltless
 ## Requirements
 
 * [neo4j](https://neo4j.com/) (>=3.5, all featured tested with 4.4.x)
-* [Ruby](https://www.ruby-lang.org/) (>=2.7, tested on CRuby/MRI only, may work
+* [Ruby](https://www.ruby-lang.org/) (>=3.2, tested on CRuby/MRI only, may work
   with other implementations as well)
 
 ## Usage
