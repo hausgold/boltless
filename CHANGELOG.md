@@ -1,8 +1,12 @@
 ### next
 
-* Added support for Rails 8.1 (#14)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.1.0 (23 October 2025)
+
+* Added support for Rails 8.1 ([#14](https://github.com/hausgold/boltless/pull/14))
 * Switched from `ActiveSupport::Configurable` to a custom implementation based
-  on `ActiveSupport::OrderedOptions` (#15)
+  on `ActiveSupport::OrderedOptions` ([#15](https://github.com/hausgold/boltless/pull/15))
 
 ### 2.0.0 (28 June 2025)
 
