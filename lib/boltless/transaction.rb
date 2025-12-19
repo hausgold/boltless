@@ -4,7 +4,7 @@ module Boltless
   # A single neo4j transaction representation.
   #
   # When passing Cypher statements you can tweak some HTTP API result options
-  # while passing the following keys to the Cypher parameters (they wont be
+  # while passing the following keys to the Cypher parameters (they won't be
   # sent to neo4j):
   #
   #   * +with_stats: true|false+: whenever to include statement
@@ -21,7 +21,7 @@ module Boltless
     # We allow to read some internal configurations
     attr_reader :access_mode, :id, :raw_state
 
-    # We allow to access helpful utilities straigth from here
+    # We allow to access helpful utilities straight from here
     delegate :build_cypher, :prepare_label, :prepare_type, :prepare_string,
              :to_options, :resolve_cypher,
              to: Boltless
@@ -219,7 +219,7 @@ module Boltless
       yield
     rescue Errors::RequestError, Errors::ResponseError,
            Errors::TransactionInBadStateError => e
-      # When an error occured, the transaction is automatically rolled back by
+      # When an error occurred, the transaction is automatically rolled back by
       # neo4j, so we cannot handle any further interaction
       cleanup
       @raw_state = :closed

@@ -446,12 +446,12 @@ RSpec.describe Boltless::Request do
 
     context 'with an unsuccessful status code' do
       let(:http_status_code) { 500 }
-      let(:body) { 'Unknown error happend' }
+      let(:body) { 'Unknown error happened' }
 
       it 'raises a Boltless::Errors::TransactionRollbackError' do
         expect { action.call }.to \
           raise_error(Boltless::Errors::TransactionRollbackError,
-                      /Unknown error happend/)
+                      /Unknown error happened/)
       end
     end
 

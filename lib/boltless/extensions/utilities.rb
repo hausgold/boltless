@@ -2,7 +2,7 @@
 
 module Boltless
   module Extensions
-    # A top-level gem-module extension add helpers and utilites.
+    # A top-level gem-module extension add helpers and utilities.
     module Utilities
       extend ActiveSupport::Concern
 
@@ -71,7 +71,7 @@ module Boltless
           end.sort.uniq.join(':')
         end
 
-        # Prepare the given input as relationship tyep for
+        # Prepare the given input as relationship type for
         # injection-free Cypher.
         #
         # @param inputs [Array<#to_s>] the input object(s) to prepare as type

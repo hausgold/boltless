@@ -267,7 +267,7 @@ module Boltless
 
             # Try to commit after the user given block, when the transaction is
             # still open, and return the results of the user given block if the
-            # transaction is successfully commited
+            # transaction is successfully committed
             tx_committed = tx.state.open? ? tx.commit : true
             next res if tx_committed
 

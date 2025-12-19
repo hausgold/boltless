@@ -73,7 +73,7 @@ module Boltless
     # transmitting and response completion)
     config_accessor(:request_timeout) { 10.seconds }
 
-    # We allow the neo4j server to bootup for the configured time. This allows
+    # We allow the neo4j server to boot-up for the configured time. This allows
     # parallel starts of the user application and the neo4j server, without
     # glitching.
     config_accessor(:wait_for_upstream_server) { 30.seconds }

@@ -2,7 +2,7 @@
 
 module Boltless
   # A shallow interface object to collect multiple Cypher statements. We have
-  # an explicit different interface (+#add+ instead ot +#run+) from a regular
+  # an explicit different interface (+#add+ instead or +#run+) from a regular
   # transaction to clarify that we just collect statements without running them
   # directly. As a result no subsequent statement can access the results of a
   # previous statement within this collection.
@@ -15,7 +15,7 @@ module Boltless
     # We allow to read our collected details
     attr_reader :statements
 
-    # We allow to access helpful utilities straigth from here
+    # We allow to access helpful utilities straight from here
     delegate :build_cypher, :prepare_label, :prepare_type, :prepare_string,
              :to_options, :resolve_cypher,
              to: Boltless

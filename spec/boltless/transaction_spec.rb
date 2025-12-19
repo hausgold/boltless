@@ -112,7 +112,7 @@ RSpec.describe Boltless::Transaction do
   describe '#access_mode' do
     let(:action) { instance.access_mode }
 
-    context 'when not explictly configured' do
+    context 'when not explicitly configured' do
       it 'returns write' do
         expect(action).to be(:write)
       end

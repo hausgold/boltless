@@ -69,7 +69,7 @@ module Boltless
 
     # Run one/multiple Cypher statements inside a one-shot transaction.
     # A new transaction is opened, the statements are run and the transaction
-    # is commited in a single HTTP request for efficiency.
+    # is committed in a single HTTP request for efficiency.
     #
     # @param statements [Array<Hash>] the Cypher statements to run
     # @return [Array<Hash{Symbol => Mixed}>] the raw neo4j results
@@ -276,7 +276,7 @@ module Boltless
     # @yield the given block
     # @return [Mixed] the result of the given block
     #
-    # @raise [Errors::RequestError] when a low-level error occured
+    # @raise [Errors::RequestError] when a low-level error occurred
     def handle_transport_errors
       yield
     rescue HTTP::Error => e
@@ -305,7 +305,7 @@ module Boltless
       # Add a new request to the counter
       @requests_done += 1
 
-      # When the +query_debug_log_enabled+ config flag is set, we prodce a
+      # When the +query_debug_log_enabled+ config flag is set, we produce a
       # logging output before the actual request is sent, in order to help
       # while debugging slow/never-ending Cypher statements
       if enabled == :debug

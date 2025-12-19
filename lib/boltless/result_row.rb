@@ -17,7 +17,7 @@ module Boltless
     # @return [Mixed] the value for the given key
     def [](key)
       # When the requested key was not found, we return +nil+, no need to
-      # perfom the actual lookup
+      # perform the actual lookup
       return unless (idx = columns.index(key.to_sym))
 
       # Otherwise return the value from the slot

@@ -25,7 +25,7 @@ def file_fixture(path)
                                           "../fixtures/files/#{path}")))
 end
 
-# Return a neo4j raw result from a file fixture. It looks excatly like produced
+# Return a neo4j raw result from a file fixture. It looks exactly like produced
 # by +Boltless::Request#handle_response_body+.
 #
 # @param suffixes [Array<String, Symbol>] additional file suffixes, check the

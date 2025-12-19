@@ -20,7 +20,7 @@ enabled to improve performance and lower memory overhead on the server side.
 [ndjson](http://ndjson.org/) format, which would even be better)
 
 The driver uses a connection pool out of persistent HTTP connections which are
-transparently being re-used. The HTTP transportation is done via
+transparently being reused. The HTTP transportation is done via
 [http.rb](https://github.com/httprb/http), a client library which implements
 the HTTP protocol natively and outsources the parsing to native extensions.
 
@@ -35,7 +35,7 @@ Object marshaller.
 We focus on the bare-metal/low-level neo4j interaction, with raw Cypher. As an
 alternative solution with higher abstraction check out
 [neo4j-http](https://github.com/doximity/neo4j-http). It provides some clever
-CRUD abstrctions like `.upsert_node()` or `.find_nodes_by()`.
+CRUD abstractions like `.upsert_node()` or `.find_nodes_by()`.
 
 - [Installation](#installation)
 - [Requirements](#requirements)
@@ -46,7 +46,7 @@ CRUD abstrctions like `.upsert_node()` or `.find_nodes_by()`.
     - [Auto commit/rollback](#auto-commitrollback)
     - [One Shot Transactions](#one-shot-transactions)
   - [Result Mapping](#result-mapping)
-  - [Addtional Result Data/Formats](#addtional-result-dataformats)
+  - [Additional Result Data/Formats](#additional-result-dataformats)
     - [Include query statistics](#include-query-statistics)
     - [Return results in graph format](#return-results-in-graph-format)
   - [Utilities](#utilities)
@@ -89,7 +89,7 @@ $ gem install boltless
 
 ### Configuration
 
-You can configure the Boltless gem in serveral ways. The most relevant settings
+You can configure the Boltless gem in several ways. The most relevant settings
 should be set on an initializer file when used together with Rails. Here comes
 a self descriptive example:
 
@@ -126,7 +126,7 @@ Boltless.configure do |config|
   # transmitting and response completion)
   config.request_timeout = 10.seconds
 
-  # We allow the neo4j server to bootup for the configured time. This allows
+  # We allow the neo4j server to boot-up for the configured time. This allows
   # parallel starts of the user application and the neo4j server, without
   # glitching.
   config.wait_for_upstream_server = 30.seconds
@@ -196,7 +196,7 @@ This way the Boltless gem sends a single HTTP request to the neo4j HTTP API to
 perform the statement and it fetches the results in a lazily mapped way. With
 the result mapping you have to pay a little performance penalty, but its only
 ~3.57% overhead, so its enabled by default. To turn it off, add `raw_results:
-true` as addtional keyword argument to all top-level calls. (eg.
+true` as additional keyword argument to all top-level calls. (eg.
 `Boltless.execute!('RETURN 1', raw_results: true)`)
 
 ### Transactions
@@ -331,7 +331,7 @@ Boltless.execute!(
 ```
 
 If you prefer to work on the raw HTTP API results (eg. for performance
-reasons), you can add `raw_results: true` as addtional keyword argument to all
+reasons), you can add `raw_results: true` as additional keyword argument to all
 top-level calls. This is how it looks like:
 
 ```ruby
@@ -349,7 +349,7 @@ Boltless.execute!(
 Checkout the [fixtures directory](./spec/fixtures/files) for more HTTP API
 response examples.
 
-### Addtional Result Data/Formats
+### Additional Result Data/Formats
 
 #### Include query statistics
 
@@ -464,7 +464,7 @@ Therefore, the Boltless gem ships an utilities to help you with that. See
 
 #### Prepare a Cypher statement
 
-Ok, you are aware of the Cypher parameters and their shortcommings. The
+Ok, you are aware of the Cypher parameters and their shortcomings. The
 Boltless gem comes with a utilities named `Boltless.build_cypher`. Use it like
 that:
 
@@ -504,7 +504,7 @@ backticks respectively.
 
 **Heads up!** Do not use the `Boltless.build_query` utility blindly with
 **ALL** of your variables. Whenever possible use the native Cypher parameters
-as this helps the neo4j database to re-use already parsed Cypher statements,
+as this helps the neo4j database to reuse already parsed Cypher statements,
 and therefore results in better performance.
 
 Furthermore, you can use the `Boltless.build_cypher` utility directly within
