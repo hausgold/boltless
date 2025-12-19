@@ -3,9 +3,6 @@
 module Boltless
   module Extensions
     # A top-level gem-module extension add helpers and utilites.
-    #
-    # rubocop:disable Metrics/BlockLength -- because this is how an
-    #   +ActiveSupport::Concern+ looks like
     module Utilities
       extend ActiveSupport::Concern
 
@@ -38,10 +35,6 @@ module Boltless
         # @yield the given block result will be used as Cypher string
         #   template
         # @return [String] the built Cypher query
-        #
-        # rubocop:disable Metrics/MethodLength -- because of the various
-        #   replacement strategies
-        # rubocop:disable Metrics/AbcSize -- ditto
         def build_cypher(**replacements)
           # Process the given replacements in order to prevent Cypher
           # injections from user given values
@@ -57,13 +50,11 @@ module Boltless
           # Then evaluate the given block to get the Cypher template
           # which should be interpolated with the replacements
           format(yield.to_s, replacements).lines.map do |line|
-            line.split('//').first.rstrip.yield_self do |processed|
+            line.split('//').first.rstrip.then do |processed|
               processed.empty? ? nil : processed
             end
           end.compact.join("\n")
         end
-        # rubocop:enable Metrics/MethodLength
-        # rubocop:enable Metrics/AbcSize
 
         # Prepare the given input(s) as node label for injection-free Cypher.
         #
@@ -156,9 +147,6 @@ module Boltless
         #
         # @param cypher [String] the Cypher query to check
         # @return [Symbol] the ANSI color name
-        #
-        # rubocop:disable Metrics/CyclomaticComplexity -- because of the
-        #   various conditions
         def cypher_logging_color(cypher)
           cypher = cypher.to_s.downcase.lines.map(&:strip)
 
@@ -179,9 +167,7 @@ module Boltless
           # Everything else, like matches
           :light_blue
         end
-        # rubocop:enable Metrics/CyclomaticComplexity
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

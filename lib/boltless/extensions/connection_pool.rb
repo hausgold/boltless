@@ -3,9 +3,6 @@
 module Boltless
   module Extensions
     # A top-level gem-module extension to add easy-to-use connection pool.
-    #
-    # rubocop:disable Metrics/BlockLength -- because this is how an
-    #   +ActiveSupport::Concern+ looks like
     module ConnectionPool
       extend ActiveSupport::Concern
 
@@ -22,7 +19,6 @@ module Boltless
         # @raise [HTTP::Error] in case the upstream server did not come up
         #
         # rubocop:disable Metrics/MethodLength -- because of the retry logic
-        # rubocop:disable Metrics/AbcSize -- ditto
         def wait_for_server!(connection)
           # Check if the server already accepted connections
           return connection if @upstream_is_ready
@@ -67,7 +63,6 @@ module Boltless
           retry
         end
         # rubocop:enable Metrics/MethodLength
-        # rubocop:enable Metrics/AbcSize
 
         # A memoized connection pool for our HTTP API clients.
         #
@@ -76,7 +71,6 @@ module Boltless
         #
         # rubocop:disable Metrics/MethodLength -- because of the connection
         #   configuration
-        # rubocop:disable Metrics/AbcSize -- ditto
         def connection_pool
           @connection_pool ||= begin
             conf = Boltless.configuration
@@ -102,14 +96,13 @@ module Boltless
                 )
                 .encoding('UTF-8')
                 .persistent(conf.base_url)
-                .yield_self do |connection|
+                .then do |connection|
                   conf.http_client_configure.call(connection)
                 end
             end
           end
         end
         # rubocop:enable Metrics/MethodLength
-        # rubocop:enable Metrics/AbcSize
       end
 
       included do
@@ -121,6 +114,5 @@ module Boltless
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end
