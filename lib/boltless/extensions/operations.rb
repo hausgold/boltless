@@ -3,9 +3,6 @@
 module Boltless
   module Extensions
     # A top-level gem-module extension for neo4j operations.
-    #
-    # rubocop:disable Metrics/BlockLength -- because this is how an
-    #   +ActiveSupport::Concern+ looks like
     module Operations
       extend ActiveSupport::Concern
 
@@ -15,12 +12,6 @@ module Boltless
         # database is completely empty and "unconfigured". (dist clean)
         #
         # @param database [String, Symbol] the neo4j database to use
-        #
-        # rubocop:disable Metrics/MethodLength -- because of multiple
-        #   transactions
-        # rubocop:disable Metrics/AbcSize -- because of the extra transaction
-        #   handlings (we cannot do multiple structural changes in
-        #   a single transaction)
         def clear_database!(database: Boltless.configuration.default_db)
           logger.warn('Clear neo4j database ..')
 
@@ -52,8 +43,6 @@ module Boltless
             " > Relationships deleted: #{stats[:relationship_deleted]}"
           )
         end
-        # rubocop:enable Metrics/MethodLength
-        # rubocop:enable Metrics/AbcSize
 
         # Check whenever the given name is already taken on the neo4j
         # database for a component (index or constraint).
@@ -170,6 +159,5 @@ module Boltless
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

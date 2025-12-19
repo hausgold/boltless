@@ -1,11 +1,12 @@
+inherit_from:
+  - https://potpourri.hausgold.de/config/rubocop.yml
+  - https://potpourri.hausgold.de/config/rubocop-gem.yml
+
 plugins:
   - rubocop-rspec
   - rubocop-rails
 
 Rails:
-  Enabled: true
-
-Style/Documentation:
   Enabled: true
 
 AllCops:
@@ -21,52 +22,15 @@ AllCops:
     - gemfiles/**/*
     - spec/fixtures/files/**/*
 
-Metrics/BlockLength:
-  Exclude:
-    - Rakefile
-    - '*.gemspec'
-    - spec/**/*.rb
-    - '**/*.rake'
-    - doc/**/*.rb
-
-# NOTE: Remove this when Ruby 2.7 is the minimum version.
-# Our examples use +pp+ a lot.
-Lint/Debugger:
-  Exclude:
-    - spec/**/*.rb
-
 # We do not require to run in a timezone configured environment.
 Rails/Date:
   Enabled: false
-
-# MFA is not yet enabled for our gems yet.
-Gemspec/RequireMFA:
-  Enabled: false
-
-# We stay with the original Ruby Style Guide recommendation.
-Layout/LineLength:
-  Max: 80
-
-# Document all the things.
-Style/DocumentationMethod:
-  Enabled: true
-  RequireForNonPublicMethods: true
 
 # It's a deliberate idiom in RSpec.
 # See: https://github.com/bbatsov/rubocop/issues/4222
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
-
-# Because +expect_any_instance_of().to have_received()+ is not
-# supported with the +with(hash_including)+ matchers
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-# Because nesting makes sense here to group the feature tests
-# more effective. This increases maintainability.
-RSpec/NestedGroups:
-  Max: 4
 
 # Disable regular Rails spec paths.
 Rails/FilePath:
@@ -77,22 +41,7 @@ Rails/FilePath:
 RSpec/ExpectChange:
   Enabled: false
 
-# Because we heavily rely on memoized helper
-# procs/lambdas and other stuff.
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-
 # This looks like a false/positive. We test explicitly
 # with the +expect+ mock call.
 RSpec/StubbedMock:
-  Enabled: false
-
-# NOTE: Remove this when Ruby 2.7 is the minimum version.
-# See: https://github.com/rubocop/rubocop/pull/11177
-Style/ObjectThen:
-  Enabled: false
-
-# NOTE: Remove this when Ruby 2.7 is the minimum version.
-# Because otherwise +.pretty_inspect+ is not defined. (+require 'pp'+)
-Lint/RedundantRequireStatement:
   Enabled: false

@@ -4,9 +4,6 @@ module Boltless
   # A neo4j HTTP API request abstraction class, which consumes a single HTTP
   # persistent connection for its whole runtime. This connection is strictly
   # owned by a single request object. It is not safe to share it.
-  #
-  # rubocop:disable Metrics/ClassLength -- because of the isolated request
-  #   abstraction
   class Request
     class << self
       # Convert a multiple Cypher queries and +Hash+ arguments into multiple
@@ -101,10 +98,6 @@ module Boltless
     # @return [Integer] the neo4j transaction identifier
     # @raise [Errors::TransactionBeginError] when we fail to start a
     #   new transaction
-    #
-    # rubocop:disable Metrics/MethodLength -- because of the error handlings
-    #   and transaction identifier parsing
-    # rubocop:disable Metrics/AbcSize -- ditto
     def begin_transaction
       log_query(:begin, Request.statement_payload('BEGIN')) do
         handle_transport_errors do
@@ -131,8 +124,6 @@ module Boltless
         end
       end
     end
-    # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
 
     # Run one/multiple Cypher statements inside an open transaction.
     #
@@ -236,7 +227,6 @@ module Boltless
     #
     # rubocop:disable Metrics/MethodLength -- because of the result handling
     #   (error, raw result, restructured result)
-    # rubocop:disable Metrics/AbcSize -- ditto
     def handle_response_body(res, tx_id: nil)
       # Parse the response body as a whole, which is returned by
       # the configured raw response handler
@@ -271,7 +261,6 @@ module Boltless
       raise Errors::InvalidJsonError.new(e.message, response: res)
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
 
     # Serialize the given object to a JSON string.
     #
@@ -356,10 +345,6 @@ module Boltless
     # @param duration [Numeric, nil] the duration (ms) of the query
     # @param statements [Array<Hash>] the Cypher statements to run
     # @return [String] the assembled logging string
-    #
-    # rubocop:disable Metrics/MethodLength -- because of the complex logging
-    #   string assembling/formatting
-    # rubocop:disable Metrics/AbcSize -- ditto
     def generate_log_str(tx_id, duration, *statements)
       dur = "(#{duration}ms)".colorize(color: :magenta, mode: :bold) \
         if duration
@@ -382,8 +367,5 @@ module Boltless
         "#{prefix} #{cypher}"
       end.join("\n")
     end
-    # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
   end
-  # rubocop:enable Metrics/ClassLength
 end

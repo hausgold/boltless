@@ -4,10 +4,6 @@ module Boltless
   module Extensions
     # A top-level gem-module extension to add easy-to-use methods to use the
     # Cypher transactional API.
-    #
-    # rubocop:disable Metrics/BlockLength -- because this is how an
-    #   +ActiveSupport::Concern+ looks like
-    # rubocop:disable Metrics/ModuleLength -- ditto
     module Transactions
       extend ActiveSupport::Concern
 
@@ -148,9 +144,6 @@ module Boltless
         #   or +nil+ on errors
         #
         # @raise [Mixed] when an exception occurs inside the user given block
-        #
-        # rubocop:disable Metrics/MethodLength -- because of the extra error
-        #   handling
         def one_shot(access_mode = :write,
                      database: Boltless.configuration.default_db,
                      raw_results: false)
@@ -175,7 +168,6 @@ module Boltless
             end
           end
         end
-        # rubocop:enable Metrics/MethodLength
 
         # Start an new transaction and run Cypher statements inside it. When
         # anything within the user given block raises, we automatically
@@ -195,8 +187,6 @@ module Boltless
         #   found by neo4j
         # @raise [Mixed] when an exception occurs inside the user given
         #   block, we re-raise it
-        #
-        # rubocop:disable Metrics/MethodLength -- because this is the workflow
         def transaction!(access_mode = :write,
                          database: Boltless.configuration.default_db,
                          raw_results: false)
@@ -233,7 +223,6 @@ module Boltless
             tx.cleanup
           end
         end
-        # rubocop:enable Metrics/MethodLength
 
         # Start an new transaction and run Cypher statements inside it. When
         # anything within the user given block raises, we automatically
@@ -250,8 +239,6 @@ module Boltless
         #
         # @raise [Mixed] when an exception occurs inside the user given
         #   block, we re-raise it
-        #
-        # rubocop:disable Metrics/MethodLength -- because this is the workflow
         def transaction(access_mode = :write,
                         database: Boltless.configuration.default_db,
                         raw_results: false)
@@ -292,10 +279,7 @@ module Boltless
             tx.cleanup
           end
         end
-        # rubocop:enable Metrics/MethodLength
       end
     end
-    # rubocop:enable Metrics/BlockLength
-    # rubocop:enable Metrics/ModuleLength
   end
 end
