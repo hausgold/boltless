@@ -41,10 +41,14 @@ module Boltless
           replacements = replacements
                          .stringify_keys
                          .each_with_object({}) do |(key, val), memo|
-            val = prepare_label(val) if key.match?(/_labels?$|^labels?$/)
-            val = prepare_type(val) if key.match?(/_types?$|^types?$/)
-            val = prepare_string(val) if key.match?(/_strs?$/)
-            memo[key.to_sym] = val
+                           if key.match?(/_labels?$|^labels?$/)
+                             val = prepare_label(val)
+                           end
+                           if key.match?(/_types?$|^types?$/)
+                             val = prepare_type(val)
+                           end
+                           val = prepare_string(val) if key.match?(/_strs?$/)
+                           memo[key.to_sym] = val
           end
 
           # Then evaluate the given block to get the Cypher template
