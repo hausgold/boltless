@@ -11,7 +11,7 @@ gemspec
 gem 'appraisal', '~> 2.4'
 gem 'benchmark', '>= 0.5'
 gem 'benchmark-ips', '~> 2.10'
-gem 'bundler', '~> 2.6'
+gem 'bundler', '>= 2.6', '< 5'
 gem 'countless', '~> 2.2'
 gem 'guard-rspec', '~> 4.7'
 gem 'irb', '~> 1.2'
