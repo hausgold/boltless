@@ -1,7 +1,11 @@
 ### next
 
-* Upgraded to Ubuntu 24.04 on Github Actions (#20)
-* Migrated to hausgold/actions@v2 (#19)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.4.0 (7 January 2026)
+
+* Upgraded to Ubuntu 24.04 on Github Actions ([#20](https://github.com/hausgold/boltless/pull/20))
+* Migrated to hausgold/actions@v2 ([#19](https://github.com/hausgold/boltless/pull/19))
 
 ### 2.3.0 (26 December 2025)
 
