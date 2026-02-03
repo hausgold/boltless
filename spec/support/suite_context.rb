@@ -7,8 +7,9 @@
 puts
 puts <<DESC
   -------------- Versions --------------
-            Ruby: #{"#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"}
-  Active Support: #{ActiveSupport.version}
+             Ruby: #{"#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"}
+   Active Support: #{ActiveSupport.version}
+  Connection Pool: #{Gem.loaded_specs['connection_pool'].version}
   --------------------------------------
 DESC
 puts

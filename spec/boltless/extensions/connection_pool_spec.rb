@@ -44,7 +44,7 @@ RSpec.describe Boltless::Extensions::ConnectionPool do
     it 'returns a configured HTTP client (connection acquire timeout)' do
       Boltless.configuration.connection_pool_timeout = 1
       reload.call
-      expect(action.instance_variable_get(:@timeout)).to be(1)
+      expect(action.instance_variable_get(:@timeout).to_i).to be(1)
     end
 
     it 'returns a configured HTTP client (persistent base URL)' do

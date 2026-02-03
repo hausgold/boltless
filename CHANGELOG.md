@@ -1,6 +1,6 @@
 ### next
 
-* TODO: Replace this bullet point with an actual description of a change.
+* Added support for `connection_pool` 3.0 (#22)
 
 ### 2.6.0 (28 January 2026)
 
