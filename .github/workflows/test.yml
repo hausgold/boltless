@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  test-rails:
     name: 'Test the gem (Ruby ${{ matrix.ruby }}, Rails ${{ matrix.rails }})'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -22,6 +22,48 @@ jobs:
         rails: ['8.0', '8.1']
     env:
       BUNDLE_GEMFILE: 'gemfiles/rails_${{ matrix.rails }}.gemfile'
+    steps:
+      - name: Prepare the environment
+        uses: hausgold/actions/ci@v2
+        with:
+          clone_token: '${{ secrets.CLONE_TOKEN }}'
+          settings_secret_key: '${{ secrets.SETTINGS_SECRET_KEY }}'
+          settings: '${{ github.repository }}'
+          target: ci/gem-test
+
+      - name: Install the correct Ruby version
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+          rubygems: '3.7.2'
+
+      - name: Start the dependent services
+        run: docker-compose up -d neo4j
+
+      - name: Setup mDNS
+        run: setup-mdns
+
+      - name: Wait for database to be ready
+        run: await-tcp-open 'neo4j.boltless.local' '7474'
+
+      - name: Run the gem tests
+        run: make test
+
+      - name: Upload the code coverage report
+        run: coverage
+
+  test-connection_pool:
+    name: 'Test the gem (Ruby ${{ matrix.ruby }}, connection_pool ${{ matrix.connection_pool }})'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4', '4.0']
+        connection_pool: ['2', '3']
+    env:
+      BUNDLE_GEMFILE: 'gemfiles/connection_pool_${{ matrix.connection_pool }}.gemfile'
     steps:
       - name: Prepare the environment
         uses: hausgold/actions/ci@v2
