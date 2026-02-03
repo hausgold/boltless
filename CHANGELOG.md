@@ -1,6 +1,10 @@
 ### next
 
-* Added support for `connection_pool` 3.0 (#22)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.7.0 (3 February 2026)
+
+* Added support for `connection_pool` 3.0 ([#22](https://github.com/hausgold/boltless/pull/22))
 
 ### 2.6.0 (28 January 2026)
 
