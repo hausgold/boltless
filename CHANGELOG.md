@@ -1,7 +1,11 @@
 ### next
 
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.8.0 (18 February 2026)
+
 * Dropped 3rd-level gem dependencies which are not directly used
-  by this gem (#23)
+  by this gem ([#23](https://github.com/hausgold/boltless/pull/23))
 
 ### 2.7.0 (3 February 2026)
 
