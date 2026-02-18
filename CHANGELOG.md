@@ -1,6 +1,7 @@
 ### next
 
-* TODO: Replace this bullet point with an actual description of a change.
+* Dropped 3rd-level gem dependencies which are not directly used
+  by this gem (#23)
 
 ### 2.7.0 (3 February 2026)
 
