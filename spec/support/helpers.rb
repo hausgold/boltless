@@ -31,7 +31,7 @@ end
 # @param suffixes [Array<String, Symbol>] additional file suffixes, check the
 #   +spec/fixtures/files/+ directory for all available variants
 def raw_result_fixture(*suffixes)
-  suffixes = suffixes.map(&:to_s).join('_')
+  suffixes = suffixes.join('_')
   suffixes = "_#{suffixes}" unless suffixes.empty?
   file = "raw_result#{suffixes}.yml"
 
