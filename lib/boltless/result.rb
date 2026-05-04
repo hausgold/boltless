@@ -31,8 +31,8 @@ module Boltless
     # @param block [Proc] the block which is called for each result row
     # @yieldparam [Boltless::ResultRow] a single result row
     # @return [Array<Boltless::ResultRow>] the result rows array itself
-    def each(&block)
-      rows.each(&block)
+    def each(&)
+      rows.each(&)
     end
 
     # A shortcut to access the result rows.
