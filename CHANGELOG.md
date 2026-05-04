@@ -1,5 +1,6 @@
 ### next
 
+* Dropped connection_pool 2.x support (#26)
 * Dropped Ruby 3.x and Rails <8.1 support (#25)
 
 ### 2.9.0 (16 March 2026)
