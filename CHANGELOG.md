@@ -1,7 +1,11 @@
 ### next
 
-* Dropped connection_pool 2.x support (#26)
-* Dropped Ruby 3.x and Rails <8.1 support (#25)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.10.0 (4 May 2026)
+
+* Dropped connection_pool 2.x support ([#26](https://github.com/hausgold/boltless/pull/26))
+* Dropped Ruby 3.x and Rails <8.1 support ([#25](https://github.com/hausgold/boltless/pull/25))
 
 ### 2.9.0 (16 March 2026)
 
