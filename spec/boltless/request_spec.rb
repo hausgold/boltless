@@ -272,7 +272,7 @@ RSpec.describe Boltless::Request do
 
       it 'logs the start of the transaction (debug)' do
         action.call
-        expect(log).to match(/\[tx:write:tbd rq:1\] BEGIN/)
+        expect(log).to include('[tx:write:tbd rq:1] BEGIN')
       end
     end
   end
