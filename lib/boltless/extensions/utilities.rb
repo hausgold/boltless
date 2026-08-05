@@ -161,7 +161,7 @@ module Boltless
           return :yellow if cypher.grep(/\s*(set|merge) /).any?
 
           # Check for deletions
-          return :red if cypher.first == 'rollback' \
+          return :red if cypher.first == 'rollback'
             || cypher.grep(/\s*(delete|remove) /).any?
 
           # Everything else, like matches
