@@ -1,6 +1,10 @@
 ### next
 
-* Corrected some RuboCop glitches (#29)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.12.0 (5 August 2026)
+
+* Corrected some RuboCop glitches ([#29](https://github.com/hausgold/boltless/pull/29))
 
 ### 2.11.1 (14 July 2026)
 

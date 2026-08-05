@@ -3,7 +3,7 @@
 # The gem version details.
 module Boltless
   # The version of the +boltless+ gem
-  VERSION = '2.11.1'
+  VERSION = '2.12.0'
 
   class << self
     # Returns the version of gem as a string.
