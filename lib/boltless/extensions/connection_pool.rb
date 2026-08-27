@@ -18,7 +18,8 @@ module Boltless
         #
         # @raise [HTTP::Error] in case the upstream server did not come up
         #
-        # rubocop:disable Metrics/MethodLength -- because of the retry logic
+        # rubocop:disable-next Metrics/MethodLength -- because of the retry
+        #   logic
         def wait_for_server!(connection)
           # Check if the server already accepted connections
           return connection if @upstream_is_ready
@@ -62,7 +63,6 @@ module Boltless
           sleep(retry_sleep)
           retry
         end
-        # rubocop:enable Metrics/MethodLength
 
         # A memoized connection pool for our HTTP API clients.
         #
