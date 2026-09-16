@@ -1,6 +1,10 @@
 ### next
 
-* Upgraded the http gem to 6.0 (#31)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.14.0 (16 September 2026)
+
+* Upgraded the http gem to 6.0 ([#31](https://github.com/hausgold/boltless/pull/31))
 
 ### 2.13.0 (27 August 2026)
 
