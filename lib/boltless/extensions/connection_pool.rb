@@ -13,8 +13,8 @@ module Boltless
         # server to come up, before sending real requests which may otherwise
         # be ignored.
         #
-        # @param connection [HTTP::Client]
-        # @return [HTTP::Client] the given connection
+        # @param connection [HTTP::Session] the persistent HTTP session
+        # @return [HTTP::Session] the given session
         #
         # @raise [HTTP::Error] in case the upstream server did not come up
         #
@@ -79,6 +79,9 @@ module Boltless
               size: conf.connection_pool_size,
               timeout: conf.connection_pool_timeout
             ) do
+              # The persistent session pools one client per origin, and
+              # sessions branched from it (eg. via +headers+) share this pool,
+              # so per-request header tweaks reuse the same TCP connection
               HTTP
                 .use({ normalize_uri: { normalizer: ->(uri) { uri } } })
                 .use(:auto_inflate)

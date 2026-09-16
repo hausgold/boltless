@@ -31,8 +31,8 @@ RSpec.describe Boltless::Extensions::ConnectionPool do
     end
     # rubocop:enable RSpec/IdenticalEqualityAssertion
 
-    it 'returns a HTTP client instance when requested' do
-      expect(action.checkout).to be_a(HTTP::Client)
+    it 'returns a HTTP session instance when requested' do
+      expect(action.checkout).to be_a(HTTP::Session)
     end
 
     it 'returns a configured HTTP client (pool size)' do
