@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Boltless
-  # A neo4j HTTP API request abstraction class, which consumes a single HTTP
-  # persistent connection for its whole runtime. This connection is strictly
+  # A neo4j HTTP API request abstraction class, which consumes a single
+  # persistent HTTP session for its whole runtime. This session is strictly
   # owned by a single request object. It is not safe to share it.
   class Request
     class << self
@@ -40,8 +40,8 @@ module Boltless
 
     # Setup a new neo4j request instance with the given connection to use.
     #
-    # @param connection [HTTP::Client] a ready to use persistent
-    #   connection object
+    # @param connection [HTTP::Session] a ready to use persistent
+    #   HTTP session
     # @param access_mode [String, Symbol] the neo4j
     #   transaction mode (+:read+, or +:write+)
     # @param database [String, Symbol] the neo4j database to use

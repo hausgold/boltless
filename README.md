@@ -147,7 +147,7 @@ Boltless.configure do |config|
 
   # We allow the http.rb gem to be configured by the user for special needs.
   # Just assign a user given block here and you can reconfigure the client.
-  # Just make sure to return the configured +HTTP::Client+ instance
+  # Just make sure to return the configured +HTTP::Session+ instance
   # afterwards.
   config.http_client_configure = proc do |connection|
     # Enable the request/response instrumentation

@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'colorize', '>= 0.8.0'
   spec.add_dependency 'connection_pool', '>= 3.0', '< 4.0'
   spec.add_dependency 'fast_jsonparser', '>= 0.6.0'
-  spec.add_dependency 'http', '~> 5.0'
+  spec.add_dependency 'http', '~> 6.0'
   spec.add_dependency 'logger', '~> 1.7'
   spec.add_dependency 'oj', '~> 3.13'
   spec.add_dependency 'rake', '~> 13.0'
